@@ -17,16 +17,20 @@ export default async function (req, res) {
       speaker,
       link,
     }),
-    temperature: 0.6,
-    max_tokens: 1000,
-    top_p: 1,
-    presence_penalty: 1,
+    temperature: 0.9,
+    max_tokens: 2000,
+    presence_penalty: 2,
   });
 
-  console.log();
-  res
-    .status(200)
-    .json({ result: completion.data.choices[0].text, data: completion.data });
+  try {
+    res
+      .status(200)
+      .json({ result: completion.data.choices[0].text, data: completion.data });
+  } catch (e) {
+    console.log(e);
+
+    res.status(400).json({});
+  }
 }
 
 function generatePrompt({ title, date, description, speaker, link }) {
@@ -36,7 +40,7 @@ function generatePrompt({ title, date, description, speaker, link }) {
   We want to share as much content as possible up until the date. 
   Share a bit of history of the speaker and how he might be an expert in the subject matter.
 
-. Make sure it is clear when to schedule each(date and times) post and where. 
+  Make sure it is clear when to schedule each(date and times) post and where. 
   
 
   split the posts with a couple lines of '-----------------------------------'
