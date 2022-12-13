@@ -6,23 +6,46 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
+  const { title, date, description, speaker, link } = req.body;
+
   const completion = await openai.createCompletion({
-    model: "text-davinci-002",
-    prompt: generatePrompt(req.body.animal),
+    model: "text-davinci-003",
+    prompt: generatePrompt({
+      title,
+      date,
+      description,
+      speaker,
+      link,
+    }),
     temperature: 0.6,
+    max_tokens: 1000,
+    top_p: 1,
+    presence_penalty: 1,
   });
-  res.status(200).json({ result: completion.data.choices[0].text });
+
+  console.log();
+  res
+    .status(200)
+    .json({ result: completion.data.choices[0].text, data: completion.data });
 }
 
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+function generatePrompt({ title, date, description, speaker, link }) {
+  return ` Andino DAO(https://twitter.com/andinodao) is hosting another event. 
+  Write a marketing strategy in spanish to drive traffic to this event by peaking interests of startup founders. include specific tweets 
+  and social media messages as well as well as times and platforms we should be posting on. 
+  We want to share as much content as possible up until the date. 
+  Share a bit of history of the speaker and how he might be an expert in the subject matter.
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+. Make sure it is clear when to schedule each(date and times) post and where. 
+  
+
+  split the posts with a couple lines of '-----------------------------------'
+
+  title:${title}
+  date:${date}
+  description:${description}
+  speaker:${speaker}
+link to event: ${link}
+  
+  `;
 }

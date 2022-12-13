@@ -3,7 +3,12 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [speaker, setSpeaker] = useState("");
+  const [date, setDate] = useState("");
+  const [link, setLink] = useState("");
+
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -13,11 +18,16 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ animal: animalInput }),
+      body: JSON.stringify({
+        title,
+        date,
+        description,
+        speaker,
+        link,
+      }),
     });
     const data = await response.json();
     setResult(data.result);
-    setAnimalInput("");
   }
 
   return (
@@ -29,16 +39,45 @@ export default function Home() {
 
       <main className={styles.main}>
         <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Automaticamente genera el tweet para los posts andino</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="title"
+            placeholder="Enter titulo"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input
+            type="text"
+            name="date"
+            placeholder="cuando es"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <textarea
+            type="text"
+            name="description"
+            placeholder="Enter a description"
+            value={description}
+            rows="10"
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <input
+            type="text"
+            name="speaker"
+            placeholder="Enter speaker"
+            value={speaker}
+            onChange={(e) => setSpeaker(e.target.value)}
+          />
+          <input
+            type="text"
+            name="link"
+            placeholder="Enter link"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+          />
+          <input type="submit" value="Generate tweet text" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
