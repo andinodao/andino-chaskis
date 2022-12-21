@@ -1,15 +1,20 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
+import { RespondeData, SocialMediaPost } from "./api/generate";
 
 export default function Home() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [speaker, setSpeaker] = useState("");
-  const [date, setDate] = useState("");
-  const [link, setLink] = useState("");
+  const [title, setTitle] = useState(
+    "CryptoMonday 14: Como crear applicar web 3 en tu empresa"
+  );
+  const [description, setDescription] = useState(
+    "En este segmento aremos entender a pymes y empresas pequenas como usar esta nueva dimension para incrementar sus ventas"
+  );
+  const [speaker, setSpeaker] = useState("Paul Garcia- tech lead Upstream");
+  const [date, setDate] = useState("January 14 2023");
+  const [link, setLink] = useState("https://andino.upstreamapp.com");
 
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<SocialMediaPost[] | null>([]);
 
   async function onSubmit(event: any) {
     event.preventDefault();
@@ -26,8 +31,8 @@ export default function Home() {
         link,
       }),
     });
-    const data = await response.json();
-    setResult(data.result);
+    const responseData: RespondeData = await response.json();
+    setResult(responseData.data);
   }
   return (
     <div className={""}>
@@ -77,7 +82,11 @@ export default function Home() {
           />
           <input type="submit" value="Generate tweet text" />
         </form>
-        <div className={""}>{result}</div>
+        <div className={""}>
+          {result?.map((v) => {
+            return v.content;
+          })}
+        </div>
       </main>
 
       <footer className={""}>

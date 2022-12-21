@@ -11,9 +11,14 @@ type RequestData = {
   link: string;
 };
 
-type RespondeData = {
-  result: string;
-  data: CreateCompletionResponse;
+export type SocialMediaPost = {
+  date: string;
+  where: string;
+  content: string;
+};
+
+export type RespondeData = {
+  data: SocialMediaPost[] | null;
 };
 
 export default async function handler(
@@ -23,6 +28,7 @@ export default async function handler(
   const { title, date, description, speaker, link } = req.body as RequestData;
 
   try {
+    console.log("model is training");
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt({
@@ -37,12 +43,13 @@ export default async function handler(
       presence_penalty: 2,
     });
 
-    console.log(completion.data.choices[0]);
+    const rawJson = completion.data.choices[0];
+    console.log(rawJson.text);
+    console.log(typeof rawJson.text);
+    const parsedResponse = JSON.parse(rawJson.text || "");
+    console.log(typeof parsedResponse);
 
-    res.status(200).json({
-      result: completion?.data?.choices[0].text || "",
-      data: completion.data,
-    });
+    res.status(200).json({ ...parsedResponse });
   } catch (e) {
     console.log(e);
 
@@ -74,39 +81,10 @@ function generatePrompt({
   
   Make sure it is clear when to schedule each(date and times) post and where. Also ensure we optimize for impressions. 
   
-The output format for each piece of content is this and clearly split them with ||||:
-
-----------------------------------------------------------------
-  -Dates that should be posted: (<time in UTC>, <Time in UTC>)
-  -Where: (Facebook, twitter, linkeding, etc)
-  -Content: <text content including hashtags>
-  -Image description: <optional img description I can use against Dalle>
-
-----------------------------------------------------------------
+The output format is a stringified json. The exported text should be ready to turn into a json object using JSON.parse() in javascript.
   
-  here is an example output:
-
-
-  ***Tweet 1*** |||| 
-  Dates that should be posted: (2/11/2022, 11am UTC) 
-  where: Twitter 
-  content: ¡Únete a nuestro evento! 🎊 Como aser una marka personal con Daniela Cervantes , CEO de Prime Axxion / Golden Capital FX / WomenCEO y fundadora del Club del Bitcoin. Descubre la importancia de crear tu marca con @andinodao #marcapersonal #startups #womenintech 
-  image description: Logo of AndinoDAO
-   
-
-  ***Tweet 2*** |||| 
-  Dates that should be posted: (2/11/2022, 11am UTC) 
-  where: Twitter 
-  content: ¡Únete a nuestro evento! 🎊 Como aser una marka personal con Daniela Cervantes , CEO de Prime Axxion / Golden Capital FX / WomenCEO y fundadora del Club del Bitcoin. Descubre la importancia de crear tu marca con @andinodao #marcapersonal #startups #womenintech 
-  image description: Logo of AndinoDAO
-   
-
-  ***Tweet 3*** |||| 
-  Dates that should be posted: (2/11/2022, 11am UTC) 
-  where: Twitter 
-  content: ¡Únete a nuestro evento! 🎊 Como aser una marka personal con Daniela Cervantes , CEO de Prime Axxion / Golden Capital FX / WomenCEO y fundadora del Club del Bitcoin. Descubre la importancia de crear tu marca con @andinodao #marcapersonal #startups #womenintech 
-  image description: Logo of AndinoDAO
-   
+  {"data":[{"date":"Fri Nov 12 2022 10:00:00 GMT-0500 (Peru Standard Time)","where":"Twitter","content":"#CryptoMonday14 está por llegar! Únete el próximo 14 de enero a @andinodao para conocer cómo las pymes y empresas pequeñas pueden crear una aplicación Web 3 que incrementar sus ventas. ¡Con Paul Garcia, Tech Lead Upstream! #startups #PYMES #web3"},{"date":"Tue Dec 28 2021 13:00:00 GMT-0500 (Peru Standard Time)","where":"LinkedIn","content":"¿Estás interesado en descubrir cómo tu empresa puede aprovechar la nueva dimensión Web 3? No te pierdas CryptoMonday14 del 14 de enero con @PaulGarcia_tlu, tech lead Upstream, cuenta con tus compañías y vencer los retos de inversión 💰#startups #PYMES #web3 #emprendimiento"},{"date":"Mon Jan 04 2024 19:00:00 GMT-0500 (Peru Standard Time)","where":"Facebook","content":"Si eres dueño de una startup, no puedes perderte el próximo evento de @andinodao. CryptoMonday14 explora algunas claves fundamentales como el uso de la web 3 para incrementar tus ventas con el keynote de @PaulGarcia_tlu #startups #PYMES #web3"}]}
+ 
 
   `;
 }
