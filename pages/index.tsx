@@ -89,7 +89,7 @@ export default function Home() {
             value={link}
             onChange={(e) => setLink(e.target.value)}
           />
-          <Button variant="contained">Generate tweet text</Button>
+          <Button variant="contained" onClick={onSubmit}>Generate tweet text</Button>
         </form>
         <div className={""}>
           {result?.map((v) => {
