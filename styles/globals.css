@@ -4,8 +4,12 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+  scroll-behavior: "smooth",
 
+}
+::-webkit-scrollbar {
+  display: none;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -15,19 +19,19 @@ a {
   box-sizing: border-box;
 }
 
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
     color: white;
-    background: black;
+    background: #0946c0
   }
 }
 
 
 /* font */
-
 @font-face {
   font-family: 'TextaAltBlack';
   src: url(../public/font/TextaAltBlack.ttf);
