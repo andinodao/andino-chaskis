@@ -24,3 +24,39 @@ a {
     background: black;
   }
 }
+
+
+/* font */
+
+@font-face {
+  font-family: 'TextaAltBlack';
+  src: url(../public/font/TextaAltBlack.ttf);
+}
+@font-face {
+  font-family: 'TextaAltBold';
+  src: url(../public/font/TextaAltBold.ttf);
+}
+@font-face {
+  font-family: 'TextaAltBook';
+  src: url(../public/font/TextaAltBook.ttf);
+}
+@font-face {
+  font-family: 'TextaAltHeavy';
+  src: url(../public/font/TextaAltHeavy.ttf);
+}
+@font-face {
+  font-family: 'TextaAltLight';
+  src: url(../public/font/TextaAltLight.ttf);
+}
+@font-face {
+  font-family: 'TextaAltMedium';
+  src: url(../public/font/TextaAltMedium.ttf);
+}
+@font-face {
+  font-family: 'TextaAltRegular';
+  src: url(../public/font/TextaAltRegular.ttf);
+}
+@font-face {
+  font-family: 'TextaAltThin';
+  src: url(../public/font/TextaAltThin.ttf);
+}
