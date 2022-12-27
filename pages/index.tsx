@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 
 import Header from "../components/Header";
 import { DataResultSocial } from "../components/DataResultSocial";
@@ -26,6 +25,7 @@ export default function Home() {
 
   async function onSubmit(event: any) {
     event.preventDefault();
+
     setisLoading(true);
 
     const response = await fetch("/api/generate", {
@@ -70,7 +70,7 @@ export default function Home() {
               background:
                 'url("https://images.unsplash.com/photo-1665686310429-ee43624978fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")',
               backgroundPosition: "center center",
-              // backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
               minHeight: "calc(100vh - 220px)",
             }}
           ></Grid>
