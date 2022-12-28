@@ -84,70 +84,6 @@ export default function Home() {
             item
             xs={12}
             md={6}
-            sx={{
-              background:
-                'url("https://images.unsplash.com/photo-1665686310429-ee43624978fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")',
-              backgroundPosition: "center center",
-              backgroundSize: "cover",
-              minHeight: {
-                xs: "calc(100vh + 160px)",
-                sm: "calc(100vh - 64px)",
-              },
-              pt: { xs: 2, sm: 3 },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {isLoading ? (
-              <div>
-                <CircularProgress
-                  size={50}
-                  sx={{
-                    color: "white",
-                  }}
-                />
-              </div>
-            ) : (
-              result?.map((res: any) => (
-                <Card
-                  sx={{
-                    width: { xs: "85%", md: "70%" },
-                    backgroundColor: "#ffffff",
-                    p: { xs: 1, md: 2 },
-                  }}
-                  key={res.where}
-                >
-                  <CardContent>
-                    <Typography>{res.content}</Typography>
-                  </CardContent>
-                  <CardActions
-                    sx={{ display: "flex", justifyContent: "right" }}
-                  >
-                    <Button
-                      variant='contained'
-                      sx={{
-                        borderRadius: 8,
-                        fontFamily: "TextaAltMedium",
-                        textTransform: "none",
-                        fontSize: 16.5,
-                        px: 3,
-                      }}
-                      onClick={() => onCopyClipboardMedia(res)}
-                    >
-                      Copiar
-                    </Button>
-                  </CardActions>
-                </Card>
-              ))
-            )}
-          </Grid>
-
-          <Grid
-            item
-            xs={12}
-            md={6}
             px={{ xs: 3, md: 15 }}
             pt={{ xs: 3, md: 0 }}
           >
@@ -257,6 +193,69 @@ export default function Home() {
                 </Button>
               </Grid>
             </form>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{
+              background:
+                'url("https://images.unsplash.com/photo-1665686310429-ee43624978fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")',
+              backgroundPosition: "center center",
+              backgroundSize: "cover",
+              minHeight: {
+                xs: "calc(100vh + 160px)",
+                sm: "calc(100vh - 64px)",
+              },
+              pt: { xs: 2, sm: 3 },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            {isLoading ? (
+              <div>
+                <CircularProgress
+                  size={50}
+                  sx={{
+                    color: "white",
+                  }}
+                />
+              </div>
+            ) : (
+              result?.map((res: any) => (
+                <Card
+                  sx={{
+                    width: { xs: "85%", md: "70%" },
+                    backgroundColor: "#ffffff",
+                    p: { xs: 1, md: 2 },
+                  }}
+                  key={res.where}
+                >
+                  <CardContent>
+                    <Typography>{res.content}</Typography>
+                  </CardContent>
+                  <CardActions
+                    sx={{ display: "flex", justifyContent: "right" }}
+                  >
+                    <Button
+                      variant='contained'
+                      sx={{
+                        borderRadius: 8,
+                        fontFamily: "TextaAltMedium",
+                        textTransform: "none",
+                        fontSize: 16.5,
+                        px: 3,
+                      }}
+                      onClick={() => onCopyClipboardMedia(res)}
+                    >
+                      Copiar
+                    </Button>
+                  </CardActions>
+                </Card>
+              ))
+            )}
           </Grid>
         </Grid>
 

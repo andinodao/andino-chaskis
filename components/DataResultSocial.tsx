@@ -18,7 +18,6 @@ export const DataResultSocial = ({
   isLoading,
   spinnerLoading,
 }: any) => {
-
   const date = new Date();
   const dateConexion = `${date.getHours()}:${date.getMinutes()} - ${date.getDate()} / ${date.getMonth()} / ${date.getFullYear()}`;
 
