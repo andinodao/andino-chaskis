@@ -19,18 +19,20 @@ import {
   CardActions,
 } from "@mui/material";
 
+import { useForm } from "./hooks/useForm";
+
 export default function Home() {
   const [isLoading, setisLoading] = useState(false);
 
-  const [title, setTitle] = useState(
+  /*   const [title, setTitle] = useState(
     "CryptoMonday 14: Como crear applicar web 3 en tu empresa"
   );
   const [description, setDescription] = useState(
     "En este segmento aremos entender a pymes y empresas pequenas como usar esta nueva dimension para incrementar sus ventas"
-  );
-  const [speaker, setSpeaker] = useState("Paul Garcia- tech lead Upstream");
+  ); */
+  /*   const [speaker, setSpeaker] = useState("Paul Garcia- tech lead Upstream");
   const [date, setDate] = useState("January 14 2023");
-  const [link, setLink] = useState("https://andino.upstreamapp.com");
+  const [link, setLink] = useState("https://andino.upstreamapp.com"); */
 
   const [result, setResult] = useState<SocialMediaPost[] | null>([]);
 
@@ -61,6 +63,17 @@ export default function Home() {
   const onCopyClipboardMedia = (res: any) => {
     copy(res.content);
   };
+
+  const { inputState, onChangeForm, onResetForm } = useForm({
+    title: "CryptoMonday 14: Como crear applicar web 3 en tu empresa",
+    description:
+      "En este segmento aremos entender a pymes y empresas pequenas como usar esta nueva dimension para incrementar sus ventas",
+    speaker: "Paul Garcia- tech lead Upstream",
+    date: "January 14, 2023",
+    link: "https://andino.upstreamapp.com",
+  });
+
+  const { title, description, speaker, date, link } = inputState;
 
   return (
     <div className='scrollbar-contentAll'>
@@ -99,7 +112,7 @@ export default function Home() {
             >
               ¡Generador contenido social media!
             </Typography>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} id='form-media'>
               <Grid container spacing={2} py={4}>
                 <Grid item xs={6}>
                   <TextField
@@ -107,7 +120,7 @@ export default function Home() {
                     name='title'
                     placeholder='Enter titulo'
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={onChangeForm}
                     fullWidth
                   />
                 </Grid>
@@ -115,9 +128,9 @@ export default function Home() {
                   <TextField
                     type='text'
                     name='date'
-                    placeholder='cuando es'
+                    placeholder='Fecha'
                     value={date}
-                    onChange={(e) => setDate(e.target.value)}
+                    onChange={onChangeForm}
                     fullWidth
                   />
                 </Grid>
@@ -128,7 +141,7 @@ export default function Home() {
                     value={description}
                     multiline
                     rows={8}
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={onChangeForm}
                     fullWidth
                   />
                 </Grid>
@@ -138,7 +151,7 @@ export default function Home() {
                     name='speaker'
                     placeholder='Enter speaker'
                     value={speaker}
-                    onChange={(e) => setSpeaker(e.target.value)}
+                    onChange={onChangeForm}
                     fullWidth
                   />
                 </Grid>
@@ -148,7 +161,7 @@ export default function Home() {
                     name='link'
                     placeholder='Enter link'
                     value={link}
-                    onChange={(e) => setLink(e.target.value)}
+                    onChange={onChangeForm}
                     fullWidth
                   />
                 </Grid>
@@ -174,6 +187,7 @@ export default function Home() {
                     textTransform: "none",
                     mb: { xs: 2, md: 0 },
                   }}
+                  onClick={onResetForm}
                 >
                   Limpiar formulario
                 </Button>
@@ -194,6 +208,7 @@ export default function Home() {
               </Grid>
             </form>
           </Grid>
+
           <Grid
             item
             xs={12}
