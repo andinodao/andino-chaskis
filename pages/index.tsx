@@ -17,22 +17,13 @@ import {
   CircularProgress,
   CardContent,
   CardActions,
+  Chip,
 } from "@mui/material";
 
 import { useForm } from "./hooks/useForm";
 
 export default function Home() {
   const [isLoading, setisLoading] = useState(false);
-
-  /*   const [title, setTitle] = useState(
-    "CryptoMonday 14: Como crear applicar web 3 en tu empresa"
-  );
-  const [description, setDescription] = useState(
-    "En este segmento aremos entender a pymes y empresas pequenas como usar esta nueva dimension para incrementar sus ventas"
-  ); */
-  /*   const [speaker, setSpeaker] = useState("Paul Garcia- tech lead Upstream");
-  const [date, setDate] = useState("January 14 2023");
-  const [link, setLink] = useState("https://andino.upstreamapp.com"); */
 
   const [result, setResult] = useState<SocialMediaPost[] | null>([]);
 
@@ -205,6 +196,7 @@ export default function Home() {
                 >
                   Crear contenido
                 </Button>
+                {/* usememo */}
               </Grid>
             </form>
           </Grid>
@@ -222,7 +214,6 @@ export default function Home() {
                 xs: "calc(100vh + 160px)",
                 sm: "calc(100vh - 64px)",
               },
-              pt: { xs: 2, sm: 3 },
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -249,7 +240,20 @@ export default function Home() {
                   key={res.where}
                 >
                   <CardContent>
-                    <Typography>{res.content}</Typography>
+                    <Chip
+                      sx={{
+                        fontFamily: "TextaAltMedium",
+                        fontSize: 18,
+                        textTransform: "capitalize",
+                        mb: 2,
+                        px: 3,
+                      }}
+                      label={res.where}
+                      variant='outlined'
+                      component='a'
+                      href={`https://${res.where}.com`}
+                    />
+                    <Typography sx={{ fontSize: 15 }}>{res.content}</Typography>
                   </CardContent>
                   <CardActions
                     sx={{ display: "flex", justifyContent: "right" }}
