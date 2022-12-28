@@ -1,12 +1,23 @@
 import Head from "next/head";
 
 import Header from "../components/Header";
-import { DataResultSocial } from "../components/DataResultSocial";
 
 import { useState } from "react";
 import { RespondeData, SocialMediaPost } from "./api/generate";
 
-import { TextField, Toolbar, Button, Grid, Typography } from "@mui/material";
+import copy from "clipboard-copy";
+
+import {
+  TextField,
+  Toolbar,
+  Button,
+  Grid,
+  Typography,
+  Card,
+  CircularProgress,
+  CardContent,
+  CardActions,
+} from "@mui/material";
 
 export default function Home() {
   const [isLoading, setisLoading] = useState(false);
@@ -44,8 +55,12 @@ export default function Home() {
     const responseData: RespondeData = await response.json();
 
     setResult(responseData?.data);
-    // setisLoading(false);
+    setisLoading(false);
   }
+
+  const onCopyClipboardMedia = (res: any) => {
+    copy(res.content);
+  };
 
   return (
     <div className='scrollbar-contentAll'>
@@ -61,26 +76,87 @@ export default function Home() {
         <Grid
           container
           alignItems='center'
-          sx={{ minHeight: "calc(100vh - 220px)" }}
+          sx={{
+            minHeight: { xs: "calc(100vh + 160px)", sm: "calc(100vh - 64px)" },
+          }}
         >
           <Grid
             item
-            xs={6}
+            xs={12}
+            md={6}
             sx={{
               background:
                 'url("https://images.unsplash.com/photo-1665686310429-ee43624978fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")',
               backgroundPosition: "center center",
               backgroundSize: "cover",
-              minHeight: "calc(100vh - 220px)",
+              minHeight: {
+                xs: "calc(100vh + 160px)",
+                sm: "calc(100vh - 64px)",
+              },
+              pt: { xs: 2, sm: 3 },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-evenly",
             }}
-          ></Grid>
-          <Grid item xs={6} px={15}>
+          >
+            {isLoading ? (
+              <div>
+                <CircularProgress
+                  size={50}
+                  sx={{
+                    color: "white",
+                  }}
+                />
+              </div>
+            ) : (
+              result?.map((res: any) => (
+                <Card
+                  sx={{
+                    width: { xs: "85%", md: "70%" },
+                    backgroundColor: "#ffffff",
+                    p: { xs: 1, md: 2 },
+                  }}
+                  key={res.where}
+                >
+                  <CardContent>
+                    <Typography>{res.content}</Typography>
+                  </CardContent>
+                  <CardActions
+                    sx={{ display: "flex", justifyContent: "right" }}
+                  >
+                    <Button
+                      variant='contained'
+                      sx={{
+                        borderRadius: 8,
+                        fontFamily: "TextaAltMedium",
+                        textTransform: "none",
+                        fontSize: 16.5,
+                        px: 3,
+                      }}
+                      onClick={() => onCopyClipboardMedia(res)}
+                    >
+                      Copiar
+                    </Button>
+                  </CardActions>
+                </Card>
+              ))
+            )}
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            md={6}
+            px={{ xs: 3, md: 15 }}
+            pt={{ xs: 3, md: 0 }}
+          >
             <Typography
               variant='h1'
               sx={{
-                width: "70%",
-                fontFamily: "TextaAltBold",
-                fontSize: 45,
+                width: { xs: "100%", md: "70%" },
+                fontFamily: "TextaAltHeavy",
+                fontSize: { xs: 38, sm: 45 },
                 margin: "0 auto",
                 textAlign: "center",
               }}
@@ -141,16 +217,26 @@ export default function Home() {
                   />
                 </Grid>
               </Grid>
-              <Grid container justifyContent='space-around' py={4}>
+              <Grid
+                container
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  justifyContent: "space-around",
+                }}
+                py={{ xs: 0, md: 4 }}
+                pb={{ xs: 5 }}
+              >
                 <Button
                   variant='contained'
                   color='inherit'
                   sx={{
-                    minWidth: "230px",
+                    minWidth: { xs: "100%", md: "230px" },
                     borderRadius: 5,
                     fontFamily: "TextaAltBold",
                     fontSize: 18,
                     textTransform: "none",
+                    mb: { xs: 2, md: 0 },
                   }}
                 >
                   Limpiar formulario
@@ -159,12 +245,13 @@ export default function Home() {
                   type='submit'
                   variant='contained'
                   sx={{
-                    width: "230px",
+                    minWidth: { xs: "100%", md: "230px" },
                     borderRadius: 5,
                     fontFamily: "TextaAltBold",
                     fontSize: 18,
                     textTransform: "none",
                   }}
+                  disabled={isLoading}
                 >
                   Crear contenido
                 </Button>
@@ -173,7 +260,11 @@ export default function Home() {
           </Grid>
         </Grid>
 
-        <DataResultSocial result={result} isLoading={isLoading} />
+        {/*         <DataResultSocial
+          result={result}
+          isLoading={isLoading}
+          spinnerLoading={spinnerLoading}
+        /> */}
       </main>
 
       {/*       <footer className={""}>

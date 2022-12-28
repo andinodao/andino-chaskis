@@ -13,38 +13,69 @@ import {
   ArrowDropDown,
 } from "@mui/icons-material";
 
-export const DataResultSocial = ({ result, isLoading }: any) => {
+export const DataResultSocial = ({
+  result,
+  isLoading,
+  spinnerLoading,
+}: any) => {
+
   const date = new Date();
   const dateConexion = `${date.getHours()}:${date.getMinutes()} - ${date.getDate()} / ${date.getMonth()} / ${date.getFullYear()}`;
 
   return (
     <div>
-      {isLoading ? (
+      {spinnerLoading ? (
         <Box
           sx={{
-            backgroundColor: "#001030",
-            color: "white",
-            pt: 1,
-            pb: 1.5,
+            position: "absolute",
+            top: 0,
+            zIndex: 999,
+            backgroundColor: "#00000050",
+            minWidth: "100vw",
+            minHeight: "100vh",
           }}
         >
-          <Toolbar sx={{ display: "block", textAlign: "center" }}>
-            <h1>¡Ya tenemos generado tu contenido!</h1>
-            <IconButton
-              sx={{
-                backgroundColor: "#003091",
-                "&:hover": {
-                  backgroundColor: "#0946c0",
-                },
-              }}
-              href='#result-media-social'
-            >
-              <ArrowDropDown sx={{ color: "#fff", fontSize: 40 }} />
-            </IconButton>
-          </Toolbar>
+          <CircularProgress
+            size={50}
+            sx={{
+              position: "absolute",
+              top: "48.8%",
+              left: "48.8%",
+              transform: "translate(-50%, -50%)",
+              color: "white",
+            }}
+          />
         </Box>
       ) : null}
-
+      <Box
+        sx={{
+          backgroundColor: "#001030",
+          color: "white",
+          py: 3.9,
+        }}
+      >
+        <Toolbar sx={{ display: "block", textAlign: "center" }}>
+          <Typography
+            variant='h3'
+            sx={{ fontFamily: "TextaAltBold", fontSize: 30, pb: 2 }}
+          >
+            {isLoading
+              ? "¡Ya tenemos generado tu contenido!"
+              : "¡Empieza a generar tu contenido!"}
+          </Typography>
+          <IconButton
+            sx={{
+              backgroundColor: "#003091",
+              "&:hover": {
+                backgroundColor: "#0946c0",
+              },
+            }}
+            href='#result-media-social'
+          >
+            <ArrowDropDown sx={{ color: "#fff", fontSize: 35 }} />
+          </IconButton>
+        </Toolbar>
+      </Box>
       {result?.map((v: any) => {
         return (
           <Grid
@@ -62,6 +93,7 @@ export const DataResultSocial = ({ result, isLoading }: any) => {
                   container
                   justifyContent='space-between'
                   alignItems='center'
+                  py={3}
                 >
                   <Typography>{dateConexion}</Typography>
                   <IconButton
@@ -95,6 +127,7 @@ export const DataResultSocial = ({ result, isLoading }: any) => {
                   container
                   justifyContent='space-between'
                   alignItems='center'
+                  py={3}
                 >
                   <Typography>{dateConexion}</Typography>
                   <IconButton
@@ -125,6 +158,7 @@ export const DataResultSocial = ({ result, isLoading }: any) => {
                     container
                     justifyContent='space-between'
                     alignItems='center'
+                    py={3}
                   >
                     <Typography>{dateConexion}</Typography>
                     <IconButton

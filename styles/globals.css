@@ -10,16 +10,6 @@ body {
   display: none;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: #0946c0
-  }
-} */
-
 
 /* font */
 @font-face {
