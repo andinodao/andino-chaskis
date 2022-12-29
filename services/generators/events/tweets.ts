@@ -1,5 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
 import { openai } from "../../../pages/api/common";
 
 type RequestData = {
@@ -19,43 +18,31 @@ export type RespondeData = {
   data: SocialMediaPost[] | null;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<RespondeData | null>
-) {
-  const { title, date, description, speaker, link } = req.body as RequestData;
+export default async function generateTweets(body: RequestData) {
+  const { title, date, description, speaker, link } = body;
 
-  try {
-    console.log("model is training");
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generateTweets({
-        title,
-        date,
-        description,
-        speaker,
-        link,
-      }),
-      temperature: 0.9,
-      max_tokens: 2000,
-      presence_penalty: 2,
-    });
+  console.log("model is training");
+  const completion = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: generateTweetsPrompt({
+      title,
+      date,
+      description,
+      speaker,
+      link,
+    }),
+    temperature: 0.9,
+    max_tokens: 2000,
+    presence_penalty: 2,
+  });
 
-    const rawJson = completion.data.choices[0];
-    console.log(rawJson.text);
-    console.log(typeof rawJson.text);
-    const parsedResponse = JSON.parse(rawJson.text || "");
-    console.log(typeof parsedResponse);
+  const rawJson = completion.data.choices[0];
+  const parsedResponse = JSON.parse(rawJson.text || "");
 
-    res.status(200).json({ ...parsedResponse });
-  } catch (e) {
-    console.log(e);
-
-    res.status(400).json(null);
-  }
+  return parsedResponse;
 }
 
-function generateTweets({
+function generateTweetsPrompt({
   title,
   date,
   description,
