@@ -32,7 +32,7 @@ export default function Header() {
       }}
     >
       <Typography
-        variant='h6'
+        variant="h6"
         sx={{
           textAlign: "center",
           my: 2,
@@ -51,7 +51,7 @@ export default function Header() {
             fontFamily: "TextaAltMedium",
             p: { xs: 2.5, sm: 0 },
           }}
-          color='inherit'
+          color="inherit"
           key={i}
         >
           {navLink}
@@ -59,8 +59,8 @@ export default function Header() {
       ))}
 
       <Button
-        variant='contained'
-        color='info'
+        variant="contained"
+        color="info"
         sx={{
           my: 3,
           mx: 2,
@@ -81,8 +81,8 @@ export default function Header() {
         <Toolbar>
           <Grid
             container
-            alignItems='center'
-            justifyContent='space-between'
+            alignItems="center"
+            justifyContent="space-between"
             py={{ xs: 2, sm: 0 }}
             px={{ md: 20 }}
           >
@@ -94,10 +94,10 @@ export default function Header() {
               xl={8}
             >
               <Image
-                src='/../public/img/logoAndino.png'
+                src="/img/logoAndino.png"
                 width={120}
                 height={35}
-                alt='Logo Andino'
+                alt="Logo Andino"
               />
             </Grid>
             <Grid item sm={8} lg={5} xl={4}>
@@ -108,7 +108,7 @@ export default function Header() {
                 <IconButton onClick={onToogleMenu}>
                   <MenuOutlined sx={{ color: "#fff" }} />
                 </IconButton>
-                <Drawer anchor='right' open={open} onClose={onToogleMenu}>
+                <Drawer anchor="right" open={open} onClose={onToogleMenu}>
                   {drawer}
                 </Drawer>
               </Box>
