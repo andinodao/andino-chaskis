@@ -1,6 +1,14 @@
 import { useState } from "react";
 
-export const useForm = (initialForm: any) => {
+export type CreateSocialMediasInput = {
+  title: string;
+  description: string;
+  speaker: string;
+  date: string;
+  link: string;
+};
+
+export const useForm = (initialForm: CreateSocialMediasInput) => {
   const [inputState, setinputState] = useState(initialForm);
 
   const onChangeForm = ({ target }: any) => {
