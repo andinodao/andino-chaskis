@@ -5,22 +5,11 @@ import Header from "../components/Header";
 import { useState } from "react";
 import { RespondeData, SocialMediaPost } from "./api/generate";
 
-import copy from "clipboard-copy";
-
-import {
-  TextField,
-  Toolbar,
-  Button,
-  Grid,
-  Typography,
-  Card,
-  CircularProgress,
-  CardContent,
-  CardActions,
-  Chip,
-} from "@mui/material";
+import { Toolbar, Grid } from "@mui/material";
 
 import { useForm } from "./hooks/useForm";
+import { DataSocialMedia } from "../components/DataSocialMedia";
+import { FormGenerateSocialMedia } from "../components/FormGenerateSocialMedia";
 
 export default function Home() {
   const [isLoading, setisLoading] = useState(false);
@@ -51,20 +40,18 @@ export default function Home() {
     setisLoading(false);
   }
 
-  const onCopyClipboardMedia = (res: any) => {
-    copy(res.content);
-  };
-
   const { inputState, onChangeForm, onResetForm } = useForm({
-    title: "CryptoMonday 14: Como crear applicar web 3 en tu empresa",
+    title: "CryptoMonday 14: Como crear aplicaciones web 3 en tu empresa",
     description:
-      "En este segmento aremos entender a pymes y empresas pequenas como usar esta nueva dimension para incrementar sus ventas",
-    speaker: "Paul Garcia- tech lead Upstream",
+      "En este segmento aremos entender a pymes y empresas pequeñas como usar esta nueva dimensión para incrementar sus ventas",
+    speaker: "Paul Garcia- Tech Lead Upstream",
     date: "January 14, 2023",
     link: "https://andino.upstreamapp.com",
   });
 
   const { title, description, speaker, date, link } = inputState;
+
+  console.log(result);
 
   return (
     <div className='scrollbar-contentAll'>
@@ -83,206 +70,18 @@ export default function Home() {
           sx={{
             minHeight: { xs: "calc(100vh + 160px)", sm: "calc(100vh - 64px)" },
           }}
+          flexWrap='wrap-reverse'
         >
-          <Grid
-            item
-            xs={12}
-            md={6}
-            px={{ xs: 3, md: 15 }}
-            pt={{ xs: 3, md: 0 }}
-          >
-            <Typography
-              variant='h1'
-              sx={{
-                width: { xs: "100%", md: "70%" },
-                fontFamily: "TextaAltHeavy",
-                fontSize: { xs: 38, sm: 45 },
-                margin: "0 auto",
-                textAlign: "center",
-              }}
-            >
-              ¡Generador contenido social media!
-            </Typography>
-            <form onSubmit={onSubmit} id='form-media'>
-              <Grid container spacing={2} py={4}>
-                <Grid item xs={6}>
-                  <TextField
-                    type='text'
-                    name='title'
-                    placeholder='Enter titulo'
-                    value={title}
-                    onChange={onChangeForm}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    type='text'
-                    name='date'
-                    placeholder='Fecha'
-                    value={date}
-                    onChange={onChangeForm}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    name='description'
-                    placeholder='Enter a description'
-                    value={description}
-                    multiline
-                    rows={8}
-                    onChange={onChangeForm}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    type='text'
-                    name='speaker'
-                    placeholder='Enter speaker'
-                    value={speaker}
-                    onChange={onChangeForm}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    type='text'
-                    name='link'
-                    placeholder='Enter link'
-                    value={link}
-                    onChange={onChangeForm}
-                    fullWidth
-                  />
-                </Grid>
-              </Grid>
-              <Grid
-                container
-                sx={{
-                  display: "flex",
-                  flexDirection: { xs: "column", md: "row" },
-                  justifyContent: "space-around",
-                }}
-                py={{ xs: 0, md: 4 }}
-                pb={{ xs: 5 }}
-              >
-                <Button
-                  variant='contained'
-                  color='inherit'
-                  sx={{
-                    minWidth: { xs: "100%", md: "230px" },
-                    borderRadius: 5,
-                    fontFamily: "TextaAltBold",
-                    fontSize: 18,
-                    textTransform: "none",
-                    mb: { xs: 2, md: 0 },
-                  }}
-                  onClick={onResetForm}
-                >
-                  Limpiar formulario
-                </Button>
-                <Button
-                  type='submit'
-                  variant='contained'
-                  sx={{
-                    minWidth: { xs: "100%", md: "230px" },
-                    borderRadius: 5,
-                    fontFamily: "TextaAltBold",
-                    fontSize: 18,
-                    textTransform: "none",
-                  }}
-                  disabled={isLoading}
-                >
-                  Crear contenido
-                </Button>
-                {/* usememo */}
-              </Grid>
-            </form>
-          </Grid>
+          <DataSocialMedia isLoading={isLoading} result={result} />
 
-          <Grid
-            item
-            xs={12}
-            md={6}
-            sx={{
-              background:
-                'url("https://images.unsplash.com/photo-1665686310429-ee43624978fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")',
-              backgroundPosition: "center center",
-              backgroundSize: "cover",
-              minHeight: {
-                xs: "calc(100vh + 160px)",
-                sm: "calc(100vh - 64px)",
-              },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {isLoading ? (
-              <div>
-                <CircularProgress
-                  size={50}
-                  sx={{
-                    color: "white",
-                  }}
-                />
-              </div>
-            ) : (
-              result?.map((res: any) => (
-                <Card
-                  sx={{
-                    width: { xs: "85%", md: "70%" },
-                    backgroundColor: "#ffffff",
-                    p: { xs: 1, md: 2 },
-                  }}
-                  key={res.where}
-                >
-                  <CardContent>
-                    <Chip
-                      sx={{
-                        fontFamily: "TextaAltMedium",
-                        fontSize: 18,
-                        textTransform: "capitalize",
-                        mb: 2,
-                        px: 3,
-                      }}
-                      label={res.where}
-                      variant='outlined'
-                      component='a'
-                      href={`https://${res.where}.com`}
-                    />
-                    <Typography sx={{ fontSize: 15 }}>{res.content}</Typography>
-                  </CardContent>
-                  <CardActions
-                    sx={{ display: "flex", justifyContent: "right" }}
-                  >
-                    <Button
-                      variant='contained'
-                      sx={{
-                        borderRadius: 8,
-                        fontFamily: "TextaAltMedium",
-                        textTransform: "none",
-                        fontSize: 16.5,
-                        px: 3,
-                      }}
-                      onClick={() => onCopyClipboardMedia(res)}
-                    >
-                      Copiar
-                    </Button>
-                  </CardActions>
-                </Card>
-              ))
-            )}
-          </Grid>
+          <FormGenerateSocialMedia
+            onSubmit={onSubmit}
+            onChangeForm={onChangeForm}
+            onResetForm={onResetForm}
+            isLoading={isLoading}
+            {...inputState}
+          />
         </Grid>
-
-        {/*         <DataResultSocial
-          result={result}
-          isLoading={isLoading}
-          spinnerLoading={spinnerLoading}
-        /> */}
       </main>
 
       {/*       <footer className={""}>
