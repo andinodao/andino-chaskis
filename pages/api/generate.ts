@@ -33,9 +33,10 @@ export default async function handler(
   const body = req.body as RequestData;
 
   try {
-    const tweets = await generateTweets(body);
-
-    const linkedInPosts = await generateLinkedinPost(body);
+    const [tweets, linkedInPosts] = await Promise.all([
+      generateTweets(body),
+      generateLinkedinPost(body),
+    ]);
 
     const resultSet = [
       ...tweets?.map((v) => ({ ...v, where: SocialMediaTypes.twitter })),
