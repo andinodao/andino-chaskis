@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { CreateCompletionResponse } from "openai";
-import { openai } from "./common";
+import generateLinkedinPost from "../../services/generators/events/linkedin";
+import generateTweets from "../../services/generators/events/tweets";
 
 type RequestData = {
   title: string;
@@ -11,7 +11,11 @@ type RequestData = {
   link: string;
 };
 
-export type SocialMediaTypes = "twitter" | "facebook" | "linkedin";
+export enum SocialMediaTypes {
+  twitter,
+  facebook,
+  linkedin,
+}
 export type SocialMediaPost = {
   date: string;
   where: SocialMediaTypes;
@@ -26,31 +30,22 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<RespondeData | null>
 ) {
-  const { title, date, description, speaker, link } = req.body as RequestData;
+  const body = req.body as RequestData;
 
   try {
-    console.log("model is training");
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt({
-        title,
-        date,
-        description,
-        speaker,
-        link,
-      }),
-      temperature: 0.9,
-      max_tokens: 2000,
-      presence_penalty: 2,
-    });
+    const tweets = await generateTweets(body);
 
-    const rawJson = completion.data.choices[0];
-    console.log(rawJson.text);
-    console.log(typeof rawJson.text);
-    const parsedResponse = JSON.parse(rawJson.text || "");
-    console.log(typeof parsedResponse);
+    const linkedInPosts = await generateLinkedinPost(body);
 
-    res.status(200).json({ ...parsedResponse });
+    const resultSet = [
+      ...tweets?.map((v) => ({ ...v, where: SocialMediaTypes.twitter })),
+      ...linkedInPosts?.map((v) => ({
+        ...v,
+        where: SocialMediaTypes.linkedin,
+      })),
+    ];
+
+    res.status(200).json({ data: resultSet });
   } catch (e) {
     console.log(e);
 

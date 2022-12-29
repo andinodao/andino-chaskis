@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { openai } from "../../../pages/api/common";
+import { ExpectedOpenAIResponse } from "./common";
 
 type RequestData = {
   title: string;
@@ -7,15 +8,6 @@ type RequestData = {
   description: string;
   speaker: string;
   link: string;
-};
-
-export type SocialMediaPost = {
-  date: string;
-  content: string;
-};
-
-export type RespondeData = {
-  data: SocialMediaPost[] | null;
 };
 
 export default async function generateTweets(body: RequestData) {
@@ -37,9 +29,9 @@ export default async function generateTweets(body: RequestData) {
   });
 
   const rawJson = completion.data.choices[0];
-  const parsedResponse = JSON.parse(rawJson.text || "");
+  const parsedResponse: ExpectedOpenAIResponse = JSON.parse(rawJson.text || "");
 
-  return parsedResponse;
+  return parsedResponse.data || [];
 }
 
 function generateTweetsPrompt({

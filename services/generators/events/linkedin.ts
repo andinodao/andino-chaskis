@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { openai } from "../../../pages/api/common";
+import { ExpectedOpenAIResponse } from "./common";
 
 type RequestData = {
   title: string;
@@ -10,19 +11,7 @@ type RequestData = {
   link: string;
 };
 
-export type SocialMediaPost = {
-  date: string;
-  content: string;
-};
-
-export type RespondeData = {
-  data: SocialMediaPost[] | null;
-};
-
-export default async function generateLinkedinPost(
-  body: RequestData,
-  res: NextApiResponse<RespondeData | null>
-) {
+export default async function generateLinkedinPost(body: RequestData) {
   const { title, date, description, speaker, link } = body;
 
   const completion = await openai.createCompletion({
@@ -40,8 +29,8 @@ export default async function generateLinkedinPost(
   });
 
   const rawJson = completion.data.choices[0];
-  const parsedResponse = JSON.parse(rawJson.text || "");
-  return parsedResponse;
+  const parsedResponse: ExpectedOpenAIResponse = JSON.parse(rawJson.text || "");
+  return parsedResponse.data || [];
 }
 
 function generateLinkedinPostPrompt({
