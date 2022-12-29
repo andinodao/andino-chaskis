@@ -4,5 +4,5 @@ export type SocialMediaPost = {
 };
 
 export type ExpectedOpenAIResponse = {
-  data: SocialMediaPost[] | null;
+  data?: SocialMediaPost[] | null;
 };
