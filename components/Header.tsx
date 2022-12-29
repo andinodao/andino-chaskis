@@ -57,22 +57,19 @@ export default function Header() {
           {navLink}
         </Link>
       ))}
-
-      <Button
-        variant="contained"
-        color="info"
+      <Link
         sx={{
-          my: 3,
-          mx: 2,
-          px: 4,
-          borderRadius: 4,
-          fontFamily: "TextaAltHeavy",
-          textTransform: "none",
-          fontSize: 16,
+          cursor: "pointer",
+          textDecoration: "none",
+          fontSize: 18,
+          fontFamily: "TextaAltMedium",
+          p: { xs: 2.5, sm: 0 },
         }}
+        color="inherit"
+        href={"/generators/social"}
       >
-        Registrarme ahora
-      </Button>
+        Generator
+      </Link>
     </Box>
   );
   return (

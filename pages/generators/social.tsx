@@ -1,15 +1,15 @@
 import Head from "next/head";
 
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
 import { useState } from "react";
-import { RespondeData, SocialMediaPost } from "./api/generate";
+import { RespondeData, SocialMediaPost } from "../api/generate";
 
-import { Toolbar, Grid, Button } from "@mui/material";
+import { Toolbar, Grid } from "@mui/material";
 
-import { useForm } from "../hooks/useForm";
-import { DataSocialMedia } from "../components/DataSocialMedia";
-import { FormGenerateSocialMedia } from "../components/FormGenerateSocialMedia";
+import { useForm } from "../../hooks/useForm";
+import { DataSocialMedia } from "../../components/DataSocialMedia";
+import { FormGenerateSocialMedia } from "../../components/FormGenerateSocialMedia";
 
 export default function Home() {
   const [isLoading, setisLoading] = useState(false);
@@ -64,7 +64,24 @@ export default function Home() {
       <Toolbar />
 
       <main className={""}>
-        <Button>Go to social generator</Button>
+        <Grid
+          container
+          alignItems="center"
+          sx={{
+            minHeight: { xs: "calc(100vh + 160px)", sm: "calc(100vh - 64px)" },
+          }}
+          flexWrap="wrap-reverse"
+        >
+          <DataSocialMedia isLoading={isLoading} result={result} />
+
+          <FormGenerateSocialMedia
+            onSubmit={onSubmit}
+            onChangeForm={onChangeForm}
+            onResetForm={onResetForm}
+            isLoading={isLoading}
+            {...inputState}
+          />
+        </Grid>
       </main>
     </div>
   );
