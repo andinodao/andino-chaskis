@@ -1,0 +1,65 @@
+overwrite: true
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+schema: "graphql/generated/schema.graphql"
+documents: "graphql/typeDefs/**/*.graphql"
+generates:
+  graphql/generated/schemaType.ts:
+    plugins:
+      - "typescript"
+  graphql/generated/fragmentTypes.json:
+    plugins:
+      - fragment-matcher
+    config:
+      apolloClientVersion: 3
+      useExplicitTyping: true
+  graphql/generated/graphql.schema.json:
+    plugins:
+      - "introspection"
+  graphql/generated/generated.tsx:
+    plugins:
+      - add:
+          content: /* eslint-disable import/order */
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-resolvers"
+      - "typescript-react-apollo"
+    config:
+      withHooks: true
+      withHOC: false
+      contextType: "graphql/context#IContext"
+      withComponent: false
+      useIndexSignature: true
+      documentMode: "external"
+      importDocumentNodeExternallyFrom: "./documents"
+      namingConvention: keep
+      dedupeOperationSuffix: true
+      operationResultSuffix: Result
+      nonOptionalTypename: true
+      preResolveTypes: true
+      exportFragmentSpreadSubTypes: true
+      apolloClientVersion: 3
+      scalars:
+        Date: Date
+        JSON: "{ [key: string]: any }"
+      mapperTypeSuffix: Model
+      mappers:
+        User: "@prisma/client/index.d#User"
+  graphql/generated/documents.ts:
+    plugins:
+      - add:
+          content: /* eslint-disable */
+      - "typescript-document-nodes"
+    config:
+      namingConvention: keep
+      dedupeOperationSuffix: true
+      operationResultSuffix: Result
+      nonOptionalTypename: true
+      apolloClientVersion: 3
+      scalars:
+        Date: Date
+        JSON: "{ [key: string]: any }"
+  graphql/generated/apollo-helpers.ts:
+    plugins:
+      - typescript-apollo-client-helpers

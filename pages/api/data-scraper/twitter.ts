@@ -9,6 +9,6 @@ export type Output = {
   comments: string[];
 };
 
-function getTweetsForAnalysis(twitterHandle: string) {
+export function getTweetsForAnalysis(twitterHandle: string) {
   return [] as Output[];
 }

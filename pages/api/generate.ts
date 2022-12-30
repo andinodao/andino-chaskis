@@ -39,8 +39,11 @@ export default async function handler(
     ]);
 
     const resultSet = [
-      ...tweets?.map((v) => ({ ...v, where: SocialMediaTypes.twitter })),
-      ...linkedInPosts?.map((v) => ({
+      ...(tweets || []).map((v) => ({
+        ...v,
+        where: SocialMediaTypes.twitter,
+      })),
+      ...(linkedInPosts || []).map((v) => ({
         ...v,
         where: SocialMediaTypes.linkedin,
       })),

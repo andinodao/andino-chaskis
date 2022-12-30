@@ -1,0 +1,5 @@
+fragment SocialMediaContentFields on SocialMediaContent {
+  date
+  where
+  content
+}

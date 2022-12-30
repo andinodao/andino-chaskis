@@ -9,6 +9,6 @@ export type Output = {
   comments: string[];
 };
 
-function getPostsForAnalysis(facebookAccount: string) {
+export function getPostsForAnalysis(facebookAccount: string) {
   return [] as Output[];
 }
