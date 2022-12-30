@@ -15,7 +15,6 @@ input InputSocialEvent {
   title: String!
   date: String!
   details: String!
-  type: SocialMediaTypes!
   link: String!
   speaker: String!
 }

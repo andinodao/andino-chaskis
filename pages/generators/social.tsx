@@ -10,35 +10,16 @@ import { Toolbar, Grid } from "@mui/material";
 import { useForm } from "../../hooks/useForm";
 import { DataSocialMedia } from "../../components/DataSocialMedia";
 import { FormGenerateSocialMedia } from "../../components/FormGenerateSocialMedia";
+import {
+  SocialMediaTypes,
+  useGenerateSocialEventContentMutation,
+} from "../../graphql/generated/generated";
 
 export default function Home() {
   const [isLoading, setisLoading] = useState(false);
 
-  const [result, setResult] = useState<SocialMediaPostResponse[] | null>([]);
-
-  async function onSubmit(event: any) {
-    event.preventDefault();
-
-    setisLoading(true);
-
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        date,
-        description,
-        speaker,
-        link,
-      }),
-    });
-    const responseData: RespondeData = await response.json();
-
-    setResult(responseData?.data);
-    setisLoading(false);
-  }
+  const [doMutation, { loading, data: result }] =
+    useGenerateSocialEventContentMutation();
 
   const { inputState, onChangeForm, onResetForm } = useForm({
     title: "CryptoMonday 14: Como crear aplicaciones web 3 en tu empresa",
@@ -48,8 +29,23 @@ export default function Home() {
     date: "January 14, 2023",
     link: "https://andino.upstreamapp.com",
   });
-
   const { title, description, speaker, date, link } = inputState;
+
+  async function onSubmit(event: any) {
+    doMutation({
+      variables: {
+        body: {
+          title,
+          date,
+          details: description,
+          speaker,
+          link,
+        },
+      },
+    });
+
+    event.preventDefault();
+  }
 
   console.log(result);
 
@@ -72,7 +68,7 @@ export default function Home() {
           }}
           flexWrap="wrap-reverse"
         >
-          <DataSocialMedia isLoading={isLoading} result={result} />
+          <DataSocialMedia isLoading={isLoading} result={result || []} />
 
           <FormGenerateSocialMedia
             onSubmit={onSubmit}

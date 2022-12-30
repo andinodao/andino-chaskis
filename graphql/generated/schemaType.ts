@@ -24,7 +24,6 @@ export type InputSocialEvent = {
   link: Scalars["String"];
   speaker: Scalars["String"];
   title: Scalars["String"];
-  type: SocialMediaTypes;
 };
 
 export type Mutation = {

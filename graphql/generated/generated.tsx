@@ -1,7 +1,6 @@
 /* eslint-disable import/order */
 import { GraphQLResolveInfo } from "graphql";
-import { User as UserModel } from "@prisma/client/index.d";
-import { IContext } from "graphql/context";
+import { IContext } from "../context";
 import * as Operations from "./documents";
 import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
@@ -34,7 +33,6 @@ export type InputSocialEvent = {
   link: Scalars["String"];
   speaker: Scalars["String"];
   title: Scalars["String"];
-  type: SocialMediaTypes;
 };
 
 export type Mutation = {

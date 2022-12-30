@@ -12,23 +12,25 @@ import {
 
 import copy from "clipboard-copy";
 import {
-  SocialMediaPostResponse,
+  SocialMediaContentFieldsFragment,
   SocialMediaTypes,
-} from "../pages/api/generate";
+} from "../graphql/generated/generated";
+import { SocialMediaPostResponse } from "../pages/api/generate";
 
 type Props = {
   isLoading: boolean;
-  result: SocialMediaPostResponse[] | null;
+  result: SocialMediaContentFieldsFragment[] | null;
 };
 
 const SocialMediasLabel = {
   [SocialMediaTypes.facebook]: "Facebook",
   [SocialMediaTypes.twitter]: "Twitter",
   [SocialMediaTypes.linkedin]: "Linkedin",
+  [SocialMediaTypes.whatsapp]: "Whatsapp",
 };
 
 export const DataSocialMedia = ({ isLoading, result }: Props) => {
-  const onCopyClipboardMedia = (res: SocialMediaPostResponse) => {
+  const onCopyClipboardMedia = (res: SocialMediaContentFieldsFragment) => {
     copy(res.content);
   };
 
@@ -95,7 +97,7 @@ export const DataSocialMedia = ({ isLoading, result }: Props) => {
           />
         </div>
       ) : (
-        result?.map((res: SocialMediaPostResponse) => (
+        result?.map((res: SocialMediaContentFieldsFragment) => (
           <Card
             sx={{
               width: { xs: "85%", md: "40%" },
