@@ -16,9 +16,7 @@ import {
 } from "../../graphql/generated/generated";
 
 export default function Home() {
-  const [isLoading, setisLoading] = useState(false);
-
-  const [doMutation, { loading, data: result }] =
+  const [doMutation, { loading: isLoading, data: result }] =
     useGenerateSocialEventContentMutation();
 
   const { inputState, onChangeForm, onResetForm } = useForm({
@@ -47,8 +45,6 @@ export default function Home() {
     event.preventDefault();
   }
 
-  console.log(result);
-
   return (
     <div className="scrollbar-contentAll">
       <Head>
@@ -68,7 +64,10 @@ export default function Home() {
           }}
           flexWrap="wrap-reverse"
         >
-          <DataSocialMedia isLoading={isLoading} result={result || []} />
+          <DataSocialMedia
+            isLoading={isLoading}
+            result={result?.generateSocialEventContent || []}
+          />
 
           <FormGenerateSocialMedia
             onSubmit={onSubmit}
