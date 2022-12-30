@@ -11,9 +11,24 @@ import {
 } from "@mui/material";
 
 import copy from "clipboard-copy";
+import {
+  SocialMediaPostResponse,
+  SocialMediaTypes,
+} from "../pages/api/generate";
 
-export const DataSocialMedia = ({ isLoading, result }: any) => {
-  const onCopyClipboardMedia = (res: any) => {
+type Props = {
+  isLoading: boolean;
+  result: SocialMediaPostResponse[];
+};
+
+const SocialMediasLabel = {
+  [SocialMediaTypes.facebook]: "Facebook",
+  [SocialMediaTypes.twitter]: "Twitter",
+  [SocialMediaTypes.linkedin]: "Linkedin",
+};
+
+export const DataSocialMedia = ({ isLoading, result }: Props) => {
+  const onCopyClipboardMedia = (res: SocialMediaPostResponse) => {
     copy(res.content);
   };
 
@@ -36,12 +51,12 @@ export const DataSocialMedia = ({ isLoading, result }: any) => {
         justifyContent: "space-evenly",
         flexWrap: "wrap",
       }}
-      className='animate__bounceIn'
+      className="animate__bounceIn"
     >
       {result?.length === 0 && !isLoading ? (
         <Typography
-          color='white'
-          variant='h1'
+          color="white"
+          variant="h1"
           sx={{
             fontSize: { xs: 25, md: 30 },
             px: { xs: 2, md: 8 },
@@ -51,7 +66,7 @@ export const DataSocialMedia = ({ isLoading, result }: any) => {
           }}
         >
           <Typography
-            component='span'
+            component="span"
             sx={{
               fontSize: { xs: 25, md: 30 },
               color: "deepskyblue",
@@ -80,7 +95,7 @@ export const DataSocialMedia = ({ isLoading, result }: any) => {
           />
         </div>
       ) : (
-        result?.map((res: any) => (
+        result?.map((res: SocialMediaPostResponse) => (
           <Card
             sx={{
               width: { xs: "85%", md: "40%" },
@@ -99,7 +114,7 @@ export const DataSocialMedia = ({ isLoading, result }: any) => {
                   alignItems: "center",
                 }}
               >
-                <Typography color='GrayText' sx={{ fontSize: 15 }}>
+                <Typography color="GrayText" sx={{ fontSize: 15 }}>
                   {res.date.slice(0, 21)}
                 </Typography>
                 <Chip
@@ -110,17 +125,15 @@ export const DataSocialMedia = ({ isLoading, result }: any) => {
                     mb: 2,
                     px: 3,
                   }}
-                  label={res.where}
-                  variant='outlined'
-                  component='a'
-                  href={`https://${res.where}.com`}
+                  label={SocialMediasLabel[res.where]}
+                  variant="outlined"
                 />
               </Box>
               <Typography sx={{ fontSize: 15 }}>{res.content}</Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "right" }}>
               <Button
-                variant='contained'
+                variant="contained"
                 sx={{
                   borderRadius: 8,
                   fontFamily: "TextaAltMedium",

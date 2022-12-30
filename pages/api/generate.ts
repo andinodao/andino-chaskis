@@ -16,14 +16,14 @@ export enum SocialMediaTypes {
   facebook,
   linkedin,
 }
-export type SocialMediaPost = {
+export type SocialMediaPostResponse = {
   date: string;
   where: SocialMediaTypes;
   content: string;
 };
 
 export type RespondeData = {
-  data: SocialMediaPost[] | null;
+  data: SocialMediaPostResponse[] | null;
 };
 
 export default async function handler(
