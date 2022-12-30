@@ -1,17 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { InputSocialEvent } from "../../../graphql/generated/generated";
 import { openai } from "../../../pages/api/common";
 import { ExpectedOpenAIResponse } from "./common";
 
-type RequestData = {
-  title: string;
-  date: string;
-  description: string;
-  speaker: string;
-  link: string;
-};
-
-export default async function generateTweets(body: RequestData) {
-  const { title, date, description, speaker, link } = body;
+export default async function generateTweets(body: InputSocialEvent) {
+  const { title, date, details, speaker, link } = body;
 
   console.log("model is training");
   const completion = await openai.createCompletion({
@@ -19,7 +12,7 @@ export default async function generateTweets(body: RequestData) {
     prompt: generateTweetsPrompt({
       title,
       date,
-      description,
+      details,
       speaker,
       link,
     }),
@@ -37,10 +30,10 @@ export default async function generateTweets(body: RequestData) {
 function generateTweetsPrompt({
   title,
   date,
-  description,
+  details,
   speaker,
   link,
-}: RequestData) {
+}: InputSocialEvent) {
   return ` Andino DAO (https://twitter.com/andinodao) is hosting another event. 
   
   Write a set of tweets leading up to the event inviting people to register to the event. 
@@ -48,7 +41,7 @@ function generateTweetsPrompt({
 
   title:${title}
   date:${date}
-  description:${description}
+  details:${details}
   speaker:${speaker}
   link to event: ${link}
 

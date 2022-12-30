@@ -1,5 +1,5 @@
 {
-  "ignorePatterns": ["graphql/generated"],
+  "ignorePatterns": ["graphql/generated/*"],
   "env": {
     "browser": true,
     "es6": true,

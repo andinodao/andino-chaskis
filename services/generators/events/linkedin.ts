@@ -1,25 +1,16 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
+import { InputSocialEvent } from "../../../graphql/generated/generated";
 import { openai } from "../../../pages/api/common";
 import { ExpectedOpenAIResponse } from "./common";
 
-type RequestData = {
-  title: string;
-  date: string;
-  description: string;
-  speaker: string;
-  link: string;
-};
-
-export default async function generateLinkedinPost(body: RequestData) {
-  const { title, date, description, speaker, link } = body;
+export default async function generateLinkedinPost(body: InputSocialEvent) {
+  const { title, date, details, speaker, link } = body;
 
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: generateLinkedinPostPrompt({
       title,
       date,
-      description,
+      details,
       speaker,
       link,
     }),
@@ -36,10 +27,10 @@ export default async function generateLinkedinPost(body: RequestData) {
 function generateLinkedinPostPrompt({
   title,
   date,
-  description,
+  details,
   speaker,
   link,
-}: RequestData) {
+}: InputSocialEvent) {
   return ` Andino DAO (https://twitter.com/andinodao) is hosting another event. 
   
   Write a set of long linkeding posts aimed at piquein interest leading up to the event inviting people to register to the event. 
@@ -48,7 +39,7 @@ function generateLinkedinPostPrompt({
 
   title:${title}
   date:${date}
-  description:${description}
+  details:${details}
   speaker:${speaker}
   link to event: ${link}
 

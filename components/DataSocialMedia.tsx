@@ -15,7 +15,6 @@ import {
   SocialMediaContentFieldsFragment,
   SocialMediaTypes,
 } from "../graphql/generated/generated";
-import { SocialMediaPostResponse } from "../pages/api/generate";
 
 type Props = {
   isLoading: boolean;

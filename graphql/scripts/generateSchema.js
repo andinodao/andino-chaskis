@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { generateSchema } = require("fast-graphql");
 
 const inputPath = "./graphql/typeDefs/**/**.gql";

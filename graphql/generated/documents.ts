@@ -7,8 +7,8 @@ export const SocialMediaContentFields = gql`
     content
   }
 `;
-export const GenerateSocialEventContent = gql`
-  mutation GenerateSocialEventContent($body: InputSocialEvent!) {
+export const GenerateSocialEventContentMutation = gql`
+  mutation GenerateSocialEventContentMutation($body: InputSocialEvent!) {
     generateSocialEventContent(body: $body) {
       ...SocialMediaContentFields
     }

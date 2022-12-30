@@ -1,19 +1,12 @@
 import Head from "next/head";
 
 import Header from "../../components/Header";
-
-import { useState } from "react";
-import { RespondeData, SocialMediaPostResponse } from "../api/generate";
-
 import { Toolbar, Grid } from "@mui/material";
-
 import { useForm } from "../../hooks/useForm";
 import { DataSocialMedia } from "../../components/DataSocialMedia";
 import { FormGenerateSocialMedia } from "../../components/FormGenerateSocialMedia";
-import {
-  SocialMediaTypes,
-  useGenerateSocialEventContentMutation,
-} from "../../graphql/generated/generated";
+import { useGenerateSocialEventContentMutation } from "../../graphql/generated/generated";
+import { useCallback } from "react";
 
 export default function Home() {
   const [doMutation, { loading: isLoading, data: result }] =
@@ -29,8 +22,8 @@ export default function Home() {
   });
   const { title, description, speaker, date, link } = inputState;
 
-  async function onSubmit(event: any) {
-    doMutation({
+  const onSubmit = useCallback(async () => {
+    await doMutation({
       variables: {
         body: {
           title,
@@ -41,9 +34,7 @@ export default function Home() {
         },
       },
     });
-
-    event.preventDefault();
-  }
+  }, [date, description, doMutation, link, speaker, title]);
 
   return (
     <div className="scrollbar-contentAll">

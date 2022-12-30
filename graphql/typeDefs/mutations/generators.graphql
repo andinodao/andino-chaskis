@@ -1,4 +1,4 @@
-mutation GenerateSocialEventContent($body: InputSocialEvent!) {
+mutation GenerateSocialEventContentMutation($body: InputSocialEvent!) {
   generateSocialEventContent(body: $body) {
     ...SocialMediaContentFields
   }

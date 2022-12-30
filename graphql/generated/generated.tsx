@@ -248,10 +248,11 @@ export type Resolvers<ContextType = IContext> = ResolversObject<{
   SocialMediaContent?: SocialMediaContentResolvers<ContextType>;
 }>;
 
-export type GenerateSocialEventContentMutationFn = Apollo.MutationFunction<
-  GenerateSocialEventContentMutationResult,
-  GenerateSocialEventContentMutationVariables
->;
+export type GenerateSocialEventContentMutationMutationFn =
+  Apollo.MutationFunction<
+    GenerateSocialEventContentMutationResult,
+    GenerateSocialEventContentMutationVariables
+  >;
 
 /**
  * __useGenerateSocialEventContentMutation__
@@ -280,14 +281,14 @@ export function useGenerateSocialEventContentMutation(
   return Apollo.useMutation<
     GenerateSocialEventContentMutationResult,
     GenerateSocialEventContentMutationVariables
-  >(Operations.GenerateSocialEventContent, options);
+  >(Operations.GenerateSocialEventContentMutation, options);
 }
 export type GenerateSocialEventContentMutationHookResult = ReturnType<
   typeof useGenerateSocialEventContentMutation
 >;
-export type GenerateSocialEventContentMutationResult =
+export type GenerateSocialEventContentMutationMutationResult =
   Apollo.MutationResult<GenerateSocialEventContentMutationResult>;
-export type GenerateSocialEventContentMutationOptions =
+export type GenerateSocialEventContentMutationMutationOptions =
   Apollo.BaseMutationOptions<
     GenerateSocialEventContentMutationResult,
     GenerateSocialEventContentMutationVariables

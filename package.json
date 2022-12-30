@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "npm run generate && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "tsc --noEmit && ./node_modules/.bin/eslint . --fix",
     "schema": "node ./graphql/scripts/generateSchema",
     "generate": "npm run schema && graphql-codegen --config codegen.yml"
   },
