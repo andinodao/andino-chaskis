@@ -11,8 +11,9 @@ export type CreateSocialMediasInput = {
 export const useForm = (initialForm: CreateSocialMediasInput) => {
   const [inputState, setinputState] = useState(initialForm);
 
-  const onChangeForm = ({ target }: any) => {
-    //Destructuramos el e.target
+  const onChangeForm: React.ChangeEventHandler<
+    HTMLTextAreaElement | HTMLInputElement
+  > = ({ target }) => {
     const { name, value } = target;
     setinputState({
       ...inputState,

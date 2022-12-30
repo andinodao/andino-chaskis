@@ -18,7 +18,7 @@ import {
 
 type Props = {
   isLoading: boolean;
-  result: SocialMediaPostResponse[];
+  result: SocialMediaPostResponse[] | null;
 };
 
 const SocialMediasLabel = {

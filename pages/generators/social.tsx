@@ -3,7 +3,7 @@ import Head from "next/head";
 import Header from "../../components/Header";
 
 import { useState } from "react";
-import { RespondeData, SocialMediaPost } from "../api/generate";
+import { RespondeData, SocialMediaPostResponse } from "../api/generate";
 
 import { Toolbar, Grid } from "@mui/material";
 
@@ -14,7 +14,7 @@ import { FormGenerateSocialMedia } from "../../components/FormGenerateSocialMedi
 export default function Home() {
   const [isLoading, setisLoading] = useState(false);
 
-  const [result, setResult] = useState<SocialMediaPost[] | null>([]);
+  const [result, setResult] = useState<SocialMediaPostResponse[] | null>([]);
 
   async function onSubmit(event: any) {
     event.preventDefault();

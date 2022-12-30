@@ -3,20 +3,18 @@ import Head from "next/head";
 import Header from "../components/Header";
 
 import { useState } from "react";
-import { RespondeData, SocialMediaPost } from "./api/generate";
+import { RespondeData, SocialMediaPostResponse } from "./api/generate";
 
-import { Toolbar, Grid, Button } from "@mui/material";
+import { Toolbar, Button } from "@mui/material";
 
 import { useForm } from "../hooks/useForm";
-import { DataSocialMedia } from "../components/DataSocialMedia";
-import { FormGenerateSocialMedia } from "../components/FormGenerateSocialMedia";
 
 export default function Home() {
   const [isLoading, setisLoading] = useState(false);
 
-  const [result, setResult] = useState<SocialMediaPost[] | null>([]);
+  const [result, setResult] = useState<SocialMediaPostResponse[] | null>([]);
 
-  async function onSubmit(event: any) {
+  async function onSubmit(event: Event) {
     event.preventDefault();
 
     setisLoading(true);

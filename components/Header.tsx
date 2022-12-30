@@ -42,7 +42,7 @@ export default function Header() {
         Andino DAO
       </Typography>
       <Divider />
-      {["Eventos", "Contribución"].map((navLink, i): any => (
+      {["Eventos", "Contribución"].map((navLink, i) => (
         <Link
           sx={{
             cursor: "pointer",
