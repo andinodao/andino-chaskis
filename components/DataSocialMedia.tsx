@@ -7,31 +7,31 @@ import {
   CardContent,
   CardActions,
   Chip,
-  Box,
-} from "@mui/material";
+  Box
+} from '@mui/material'
 
-import copy from "clipboard-copy";
+import copy from 'clipboard-copy'
 import {
   SocialMediaContentFieldsFragment,
-  SocialMediaTypes,
-} from "../graphql/generated/generated";
+  SocialMediaTypes
+} from '../graphql/generated/generated'
 
 type Props = {
-  isLoading: boolean;
-  result: SocialMediaContentFieldsFragment[] | null;
-};
+  isLoading: boolean
+  result: SocialMediaContentFieldsFragment[] | null
+}
 
 const SocialMediasLabel = {
-  [SocialMediaTypes.facebook]: "Facebook",
-  [SocialMediaTypes.twitter]: "Twitter",
-  [SocialMediaTypes.linkedin]: "Linkedin",
-  [SocialMediaTypes.whatsapp]: "Whatsapp",
-};
+  [SocialMediaTypes.facebook]: 'Facebook',
+  [SocialMediaTypes.twitter]: 'Twitter',
+  [SocialMediaTypes.linkedin]: 'Linkedin',
+  [SocialMediaTypes.whatsapp]: 'Whatsapp'
+}
 
 export const DataSocialMedia = ({ isLoading, result }: Props) => {
   const onCopyClipboardMedia = (res: SocialMediaContentFieldsFragment) => {
-    copy(res.content);
-  };
+    copy(res.content)
+  }
 
   return (
     <Grid
@@ -41,16 +41,16 @@ export const DataSocialMedia = ({ isLoading, result }: Props) => {
       sx={{
         background:
           'linear-gradient(#00000090, #00000090), url("https://images.unsplash.com/photo-1665686310429-ee43624978fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")',
-        backgroundPosition: "center center",
-        backgroundSize: "cover",
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
         minHeight: {
-          xs: "calc(100vh - 80px)",
-          sm: "calc(100vh - 64px)",
+          xs: 'calc(100vh - 80px)',
+          sm: 'calc(100vh - 64px)'
         },
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-evenly",
-        flexWrap: "wrap",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        flexWrap: 'wrap'
       }}
       className="animate__bounceIn"
     >
@@ -61,20 +61,20 @@ export const DataSocialMedia = ({ isLoading, result }: Props) => {
           sx={{
             fontSize: { xs: 25, md: 30 },
             px: { xs: 2, md: 8 },
-            fontFamily: "TextaAltMedium",
+            fontFamily: 'TextaAltMedium',
             lineHeight: 1.5,
-            letterSpacing: 1,
+            letterSpacing: 1
           }}
         >
           <Typography
             component="span"
             sx={{
               fontSize: { xs: 25, md: 30 },
-              color: "deepskyblue",
-              fontFamily: "TextaAltMedium",
+              color: 'deepskyblue',
+              fontFamily: 'TextaAltMedium'
             }}
           >
-            Bienvenidos a Andino Chaski{" "}
+            Bienvenidos a Andino Chaski{' '}
           </Typography>
           nuestro agente de marketing de AI. Este agente fue creado para
           preparar todo el contenido de las redes sociales para usted en función
@@ -91,7 +91,7 @@ export const DataSocialMedia = ({ isLoading, result }: Props) => {
           <CircularProgress
             size={60}
             sx={{
-              color: "white",
+              color: 'white'
             }}
           />
         </div>
@@ -99,20 +99,20 @@ export const DataSocialMedia = ({ isLoading, result }: Props) => {
         result?.map((res: SocialMediaContentFieldsFragment) => (
           <Card
             sx={{
-              width: { xs: "85%", md: "40%" },
-              backgroundColor: "#ffffff",
+              width: { xs: '85%', md: '40%' },
+              backgroundColor: '#ffffff',
               p: { xs: 1, md: 2 },
               my: 2,
-              cursor: "pointer",
+              cursor: 'pointer'
             }}
             key={res.where}
           >
             <CardContent>
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
                 }}
               >
                 <Typography color="GrayText" sx={{ fontSize: 15 }}>
@@ -120,11 +120,11 @@ export const DataSocialMedia = ({ isLoading, result }: Props) => {
                 </Typography>
                 <Chip
                   sx={{
-                    fontFamily: "TextaAltMedium",
+                    fontFamily: 'TextaAltMedium',
                     fontSize: 18,
-                    textTransform: "capitalize",
+                    textTransform: 'capitalize',
                     mb: 2,
-                    px: 3,
+                    px: 3
                   }}
                   label={SocialMediasLabel[res.where]}
                   variant="outlined"
@@ -132,15 +132,15 @@ export const DataSocialMedia = ({ isLoading, result }: Props) => {
               </Box>
               <Typography sx={{ fontSize: 15 }}>{res.content}</Typography>
             </CardContent>
-            <CardActions sx={{ display: "flex", justifyContent: "right" }}>
+            <CardActions sx={{ display: 'flex', justifyContent: 'right' }}>
               <Button
                 variant="contained"
                 sx={{
                   borderRadius: 8,
-                  fontFamily: "TextaAltMedium",
-                  textTransform: "none",
+                  fontFamily: 'TextaAltMedium',
+                  textTransform: 'none',
                   fontSize: 16.5,
-                  px: 3,
+                  px: 3
                 }}
                 onClick={() => onCopyClipboardMedia(res)}
               >
@@ -151,5 +151,5 @@ export const DataSocialMedia = ({ isLoading, result }: Props) => {
         ))
       )}
     </Grid>
-  );
-};
+  )
+}

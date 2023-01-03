@@ -1,4 +1,4 @@
-import { TextField, Button, Grid, Typography } from "@mui/material";
+import { TextField, Button, Grid, Typography } from '@mui/material'
 
 export const FormGenerateSocialMedia = ({
   onSubmit,
@@ -9,18 +9,18 @@ export const FormGenerateSocialMedia = ({
   link,
   onChangeForm,
   onResetForm,
-  isLoading,
+  isLoading
 }: any) => {
   return (
     <Grid item xs={12} lg={6} px={{ xs: 3, md: 15 }} pt={{ xs: 3, md: 5 }}>
       <Typography
         variant="h1"
         sx={{
-          width: { xs: "100%", md: "70%" },
-          fontFamily: "TextaAltHeavy",
+          width: { xs: '100%', md: '70%' },
+          fontFamily: 'TextaAltHeavy',
           fontSize: { xs: 38, sm: 45 },
-          margin: "0 auto",
-          textAlign: "center",
+          margin: '0 auto',
+          textAlign: 'center'
         }}
       >
         ¡Generador contenido social media!
@@ -82,9 +82,9 @@ export const FormGenerateSocialMedia = ({
         <Grid
           container
           sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            justifyContent: "space-around",
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'space-around'
           }}
           py={{ xs: 0, md: 4 }}
           pb={{ xs: 5 }}
@@ -93,12 +93,12 @@ export const FormGenerateSocialMedia = ({
             variant="contained"
             color="inherit"
             sx={{
-              minWidth: { xs: "100%", md: "230px" },
+              minWidth: { xs: '100%', md: '230px' },
               borderRadius: 5,
-              fontFamily: "TextaAltBold",
+              fontFamily: 'TextaAltBold',
               fontSize: 18,
-              textTransform: "none",
-              mb: { xs: 2, md: 0 },
+              textTransform: 'none',
+              mb: { xs: 2, md: 0 }
             }}
             onClick={onResetForm}
           >
@@ -108,11 +108,11 @@ export const FormGenerateSocialMedia = ({
             onClick={onSubmit}
             variant="contained"
             sx={{
-              minWidth: { xs: "100%", md: "230px" },
+              minWidth: { xs: '100%', md: '230px' },
               borderRadius: 5,
-              fontFamily: "TextaAltBold",
+              fontFamily: 'TextaAltBold',
               fontSize: 18,
-              textTransform: "none",
+              textTransform: 'none'
             }}
             disabled={isLoading}
           >
@@ -121,5 +121,5 @@ export const FormGenerateSocialMedia = ({
         </Grid>
       </form>
     </Grid>
-  );
-};
+  )
+}

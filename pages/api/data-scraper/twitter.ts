@@ -3,12 +3,12 @@
 // output: an array of tweets and information about about it in the format
 
 export type Output = {
-  content: string;
-  date: string;
-  likes: number;
-  comments: string[];
-};
+  content: string
+  date: string
+  likes: number
+  comments: string[]
+}
 
 export function getTweetsForAnalysis(twitterHandle: string) {
-  return [] as Output[];
+  return [] as Output[]
 }

@@ -1,10 +1,10 @@
-import generateLinkedinPost from "../../services/generators/events/linkedin";
-import generateTweets from "../../services/generators/events/tweets";
+import generateLinkedinPost from '../../services/generators/events/linkedin'
+import generateTweets from '../../services/generators/events/tweets'
 import {
   Resolvers,
   SocialMediaTypes,
-  SocialMediaContent,
-} from "../generated/generated";
+  SocialMediaContent
+} from '../generated/generated'
 
 const resolver: Resolvers = {
   Query: {},
@@ -12,31 +12,31 @@ const resolver: Resolvers = {
     generateSocialEventContent: async (_, { body }) => {
       const [tweets, linkedInPosts] = await Promise.all([
         generateTweets(body),
-        generateLinkedinPost(body),
-      ]);
+        generateLinkedinPost(body)
+      ])
 
       const resultSet = [
-        ...(tweets || []).map((v) => ({
+        ...(tweets || []).map(v => ({
           ...v,
-          __typename: "SocialMediaContent",
-          where: SocialMediaTypes.twitter,
+          __typename: 'SocialMediaContent',
+          where: SocialMediaTypes.twitter
         })),
-        ...(linkedInPosts || []).map((v) => ({
+        ...(linkedInPosts || []).map(v => ({
           ...v,
-          __typename: "SocialMediaContent",
-          where: SocialMediaTypes.linkedin,
-        })),
-      ] as SocialMediaContent[];
+          __typename: 'SocialMediaContent',
+          where: SocialMediaTypes.linkedin
+        }))
+      ] as SocialMediaContent[]
 
-      return resultSet;
-    },
+      return resultSet
+    }
   },
 
   SocialMediaContent: {
-    where: (v) => v.where,
-    content: (v) => v.content,
-    date: (v) => v.date,
-  },
-};
+    where: v => v.where,
+    content: v => v.content,
+    date: v => v.date
+  }
+}
 
-export default resolver;
+export default resolver

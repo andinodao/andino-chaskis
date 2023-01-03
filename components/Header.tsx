@@ -1,4 +1,4 @@
-import { MenuOutlined } from "@mui/icons-material";
+import { MenuOutlined } from '@mui/icons-material'
 import {
   AppBar,
   Button,
@@ -9,47 +9,47 @@ import {
   Box,
   IconButton,
   Divider,
-  Typography,
-} from "@mui/material";
-import Image from "next/image";
-import { useState } from "react";
+  Typography
+} from '@mui/material'
+import Image from 'next/image'
+import { useState } from 'react'
 
 export default function Header() {
-  const [open, setopen] = useState(false);
+  const [open, setopen] = useState(false)
 
   const onToogleMenu = () => {
-    setopen(!open);
-  };
+    setopen(!open)
+  }
 
   const drawer = (
     <Box
       sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: { xs: "column", sm: "row" },
-        alignItems: { sm: "center" },
-        justifyContent: { sm: "space-between" },
+        width: '100%',
+        display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' },
+        alignItems: { sm: 'center' },
+        justifyContent: { sm: 'space-between' }
       }}
     >
       <Typography
         variant="h6"
         sx={{
-          textAlign: "center",
+          textAlign: 'center',
           my: 2,
-          display: { xs: "block", sm: "none" },
+          display: { xs: 'block', sm: 'none' }
         }}
       >
         Andino DAO
       </Typography>
       <Divider />
-      {["Eventos", "Contribución"].map((navLink, i) => (
+      {['Eventos', 'Contribución'].map((navLink, i) => (
         <Link
           sx={{
-            cursor: "pointer",
-            textDecoration: "none",
+            cursor: 'pointer',
+            textDecoration: 'none',
             fontSize: 18,
-            fontFamily: "TextaAltMedium",
-            p: { xs: 2.5, sm: 0 },
+            fontFamily: 'TextaAltMedium',
+            p: { xs: 2.5, sm: 0 }
           }}
           color="inherit"
           key={i}
@@ -59,22 +59,22 @@ export default function Header() {
       ))}
       <Link
         sx={{
-          cursor: "pointer",
-          textDecoration: "none",
+          cursor: 'pointer',
+          textDecoration: 'none',
           fontSize: 18,
-          fontFamily: "TextaAltMedium",
-          p: { xs: 2.5, sm: 0 },
+          fontFamily: 'TextaAltMedium',
+          p: { xs: 2.5, sm: 0 }
         }}
         color="inherit"
-        href={"/generators/social"}
+        href={'/generators/social'}
       >
         Generator
       </Link>
     </Box>
-  );
+  )
   return (
     <>
-      <AppBar sx={{ backgroundColor: "#001030" }}>
+      <AppBar sx={{ backgroundColor: '#001030' }}>
         <Toolbar>
           <Grid
             container
@@ -98,12 +98,12 @@ export default function Header() {
               />
             </Grid>
             <Grid item sm={8} lg={5} xl={4}>
-              <Grid container sx={{ display: { xs: "none", sm: "flex" } }}>
+              <Grid container sx={{ display: { xs: 'none', sm: 'flex' } }}>
                 {drawer}
               </Grid>
-              <Box sx={{ display: { xs: "block", sm: "none" } }}>
+              <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
                 <IconButton onClick={onToogleMenu}>
-                  <MenuOutlined sx={{ color: "#fff" }} />
+                  <MenuOutlined sx={{ color: '#fff' }} />
                 </IconButton>
                 <Drawer anchor="right" open={open} onClose={onToogleMenu}>
                   {drawer}
@@ -114,5 +114,5 @@ export default function Header() {
         </Toolbar>
       </AppBar>
     </>
-  );
+  )
 }

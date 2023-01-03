@@ -1,8 +1,8 @@
 export type SocialMediaPost = {
-  date: string;
-  content: string;
-};
+  date: string
+  content: string
+}
 
 export type ExpectedOpenAIResponse = {
-  data?: SocialMediaPost[] | null;
-};
+  data?: SocialMediaPost[] | null
+}

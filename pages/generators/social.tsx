@@ -1,26 +1,26 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-import Header from "../../components/Header";
-import { Toolbar, Grid } from "@mui/material";
-import { useForm } from "../../hooks/useForm";
-import { DataSocialMedia } from "../../components/DataSocialMedia";
-import { FormGenerateSocialMedia } from "../../components/FormGenerateSocialMedia";
-import { useGenerateSocialEventContentMutation } from "../../graphql/generated/generated";
-import { useCallback } from "react";
+import Header from '../../components/Header'
+import { Toolbar, Grid } from '@mui/material'
+import { useForm } from '../../hooks/useForm'
+import { DataSocialMedia } from '../../components/DataSocialMedia'
+import { FormGenerateSocialMedia } from '../../components/FormGenerateSocialMedia'
+import { useGenerateSocialEventContentMutation } from '../../graphql/generated/generated'
+import { useCallback } from 'react'
 
 export default function Home() {
   const [doMutation, { loading: isLoading, data: result }] =
-    useGenerateSocialEventContentMutation();
+    useGenerateSocialEventContentMutation()
 
   const { inputState, onChangeForm, onResetForm } = useForm({
-    title: "CryptoMonday 14: Como crear aplicaciones web 3 en tu empresa",
+    title: 'CryptoMonday 14: Como crear aplicaciones web 3 en tu empresa',
     description:
-      "En este segmento aremos entender a pymes y empresas pequeñas como usar esta nueva dimensión para incrementar sus ventas",
-    speaker: "Paul Garcia- Tech Lead Upstream",
-    date: "January 14, 2023",
-    link: "https://andino.upstreamapp.com",
-  });
-  const { title, description, speaker, date, link } = inputState;
+      'En este segmento aremos entender a pymes y empresas pequeñas como usar esta nueva dimensión para incrementar sus ventas',
+    speaker: 'Paul Garcia- Tech Lead Upstream',
+    date: 'January 14, 2023',
+    link: 'https://andino.upstreamapp.com'
+  })
+  const { title, description, speaker, date, link } = inputState
 
   const onSubmit = useCallback(async () => {
     await doMutation({
@@ -30,11 +30,11 @@ export default function Home() {
           date,
           details: description,
           speaker,
-          link,
-        },
-      },
-    });
-  }, [date, description, doMutation, link, speaker, title]);
+          link
+        }
+      }
+    })
+  }, [date, description, doMutation, link, speaker, title])
 
   return (
     <div className="scrollbar-contentAll">
@@ -46,12 +46,12 @@ export default function Home() {
       <Header />
       <Toolbar />
 
-      <main className={""}>
+      <main className={''}>
         <Grid
           container
           alignItems="center"
           sx={{
-            minHeight: { xs: "calc(100vh + 160px)", sm: "calc(100vh - 64px)" },
+            minHeight: { xs: 'calc(100vh + 160px)', sm: 'calc(100vh - 64px)' }
           }}
           flexWrap="wrap-reverse"
         >
@@ -70,5 +70,5 @@ export default function Home() {
         </Grid>
       </main>
     </div>
-  );
+  )
 }

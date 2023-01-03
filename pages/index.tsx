@@ -1,7 +1,7 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-import Header from "../components/Header";
-import { Toolbar, Button } from "@mui/material";
+import Header from '../components/Header'
+import { Toolbar, Button } from '@mui/material'
 
 export default function Home() {
   return (
@@ -14,9 +14,9 @@ export default function Home() {
       <Header />
       <Toolbar />
 
-      <main className={""}>
+      <main className={''}>
         <Button>Go to social generator</Button>
       </main>
     </div>
-  );
+  )
 }

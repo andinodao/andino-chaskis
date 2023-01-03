@@ -1,30 +1,30 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { InputSocialEvent } from "../../../graphql/generated/generated";
-import { openai } from "../../../pages/api/common";
-import { ExpectedOpenAIResponse } from "./common";
+import { InputSocialEvent } from '../../../graphql/generated/generated'
+import { openai } from '../../../pages/api/common'
+import { ExpectedOpenAIResponse } from './common'
 
 export default async function generateTweets(body: InputSocialEvent) {
-  const { title, date, details, speaker, link } = body;
+  const { title, date, details, speaker, link } = body
 
-  console.log("model is training");
+  console.log('model is training')
   const completion = await openai.createCompletion({
-    model: "text-davinci-003",
+    model: 'text-davinci-003',
     prompt: generateTweetsPrompt({
       title,
       date,
       details,
       speaker,
-      link,
+      link
     }),
     temperature: 0.9,
     max_tokens: 2000,
-    presence_penalty: 2,
-  });
+    presence_penalty: 2
+  })
 
-  const rawJson = completion.data.choices[0];
-  const parsedResponse: ExpectedOpenAIResponse = JSON.parse(rawJson.text || "");
+  const rawJson = completion.data.choices[0]
+  const parsedResponse: ExpectedOpenAIResponse = JSON.parse(rawJson.text || '')
 
-  return parsedResponse?.data || [];
+  return parsedResponse?.data || []
 }
 
 function generateTweetsPrompt({
@@ -32,7 +32,7 @@ function generateTweetsPrompt({
   date,
   details,
   speaker,
-  link,
+  link
 }: InputSocialEvent) {
   return ` Andino DAO (https://twitter.com/andinodao) is hosting another event. 
   
@@ -56,5 +56,5 @@ The output format is a stringified json. The exported text should be ready to tu
   {"data":[{"date":"Fri Nov 12 2022 10:00:00 GMT-0500 (Peru Standard Time)","content":"#CryptoMonday14 está por llegar! Únete el próximo 14 de enero a @andinodao para conocer cómo las pymes y empresas pequeñas pueden crear una aplicación Web 3 que incrementar sus ventas. ¡Con Paul Garcia, Tech Lead Upstream! #startups #PYMES #web3"},{"date":"Tue Dec 28 2021 13:00:00 GMT-0500 (Peru Standard Time)","content":"¿Estás interesado en descubrir cómo tu empresa puede aprovechar la nueva dimensión Web 3? No te pierdas CryptoMonday14 del 14 de enero con @PaulGarcia_tlu, tech lead Upstream, cuenta con tus compañías y vencer los retos de inversión 💰#startups #PYMES #web3 #emprendimiento"},{"date":"Mon Jan 04 2024 19:00:00 GMT-0500 (Peru Standard Time)","content":"Si eres dueño de una startup, no puedes perderte el próximo evento de @andinodao. CryptoMonday14 explora algunas claves fundamentales como el uso de la web 3 para incrementar tus ventas con el keynote de @PaulGarcia_tlu #startups #PYMES #web3"}]}
  
 
-  `;
+  `
 }
