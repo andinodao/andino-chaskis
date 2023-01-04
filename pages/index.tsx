@@ -23,7 +23,7 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
+export const getServerSideProps: GetServerSideProps = async () => {
   await mainSpeakerFunction()
 
   return {

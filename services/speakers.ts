@@ -15,31 +15,26 @@ async function parseCsv(csvFileName: string) {
   return dataSet
 }
 
-export async function downloadImagesFromCsv(csvFileName: string) {
+export async function downloadSpeakerData(csvFileName: string) {
   const filePath = path.resolve(csvFileName)
   const fileData = await parseCsv(filePath)
+  console.log(fileData.length)
 
   for (const dataRow of fileData) {
+    const [fileName, urlPart] = getImageInfo(dataRow['Foto del speaker'])
     console.log(dataRow['Foto del speaker'])
-    const [fileName, urlPart]: string[] = dataRow['Foto del speaker'].split('(')
-
     if (!fileName || !urlPart) {
-      return
+      continue
     }
     // Download the image at the URL and save it to the public/images folder
     const newFilePath = path.resolve(
-      `public/images/${fileName.replaceAll(' ', '')}`
+      `public/profilepics/${fileName.replaceAll(' ', '')}`
     )
     await downloadImage(getImageUrl(urlPart.replaceAll(')', '')), newFilePath)
   }
 }
 
 async function downloadImage(url: string, filePath: string) {
-  console.log('----------------------------------------------')
-  console.log(url)
-  console.log(filePath)
-  console.log('----------------------------------------------')
-
   const response = await axios.get(url, { responseType: 'stream' })
   if (response.status !== 200) {
     throw new Error(`Failed to download image at ${url}`)
@@ -72,6 +67,21 @@ function getImageUrl(input: string): string {
 export const mainSpeakerFunction = async () => {
   console.log('k')
   const csvLocation = 'speakers.csv'
-  await downloadImagesFromCsv(csvLocation)
+  await downloadSpeakerData(csvLocation)
   console.log('k')
+}
+
+function getImageInfo(input: string) {
+  // Use a regular expression to extract the name and URL from the input string
+  const nameRegex = /^[^\s\(]+/
+  const urlRegex = /https:\/\/[^\s]+/
+  const nameMatch = input.match(nameRegex)
+  const urlMatch = input.match(urlRegex)
+
+  // If a match was found for both the name and the URL, return them as an array. Otherwise, return an empty array.
+  if (nameMatch && urlMatch) {
+    return [nameMatch[0], urlMatch[0]]
+  } else {
+    return ['', '']
+  }
 }
