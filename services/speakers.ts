@@ -73,7 +73,7 @@ export const mainSpeakerFunction = async () => {
 
 function getImageInfo(input: string) {
   // Use a regular expression to extract the name and URL from the input string
-  const nameRegex = /^[^\s\(]+/
+  const nameRegex = /^[^\s(]+/
   const urlRegex = /https:\/\/[^\s]+/
   const nameMatch = input.match(nameRegex)
   const urlMatch = input.match(urlRegex)
