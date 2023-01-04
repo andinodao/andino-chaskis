@@ -1,25 +1,12 @@
 import Head from 'next/head'
 
-<<<<<<< HEAD
-import Header from "../../components/Header";
-
-import { useState } from "react";
-import { RespondeData, SocialMediaPostResponse } from "../api/generate";
-
-import { Toolbar, Grid, Tabs, Tab, Typography, Box } from "@mui/material";
-
-import { useForm } from "../../hooks/useForm";
-import { DataSocialMedia } from "../../components/DataSocialMedia";
-import { FormGenerateSocialMedia } from "../../components/FormGenerateSocialMedia";
-=======
 import Header from '../../components/Header'
-import { Toolbar, Grid } from '@mui/material'
+import { Toolbar, Grid, Box, Typography } from '@mui/material'
 import { useForm } from '../../hooks/useForm'
 import { DataSocialMedia } from '../../components/DataSocialMedia'
 import { FormGenerateSocialMedia } from '../../components/FormGenerateSocialMedia'
 import { useGenerateSocialEventContentMutation } from '../../graphql/generated/generated'
 import { useCallback } from 'react'
->>>>>>> f9ee9d170e82b7dca1f6a1f97fe3ad8e2549b394
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -42,62 +29,12 @@ function TabPanel(props: any) {
 }
 
 export default function Home() {
-<<<<<<< HEAD
-  const [isLoading, setisLoading] = useState(false);
-  const [result, setResult] = useState<SocialMediaPostResponse[] | null>([]);
-
-  async function onSubmit(event: any) {
-    event.preventDefault();
-    setisLoading(true);
-
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        date,
-        description,
-        speaker,
-        link,
-      }),
-    });
-    const responseData: RespondeData = await response.json();
-
-    setResult(responseData?.data);
-    setisLoading(false);
-  }
-=======
   const [doMutation, { loading: isLoading, data: result }] =
     useGenerateSocialEventContentMutation()
->>>>>>> f9ee9d170e82b7dca1f6a1f97fe3ad8e2549b394
 
   const { inputState, onChangeForm, onResetForm } = useForm({
     title: 'CryptoMonday 14: Como crear aplicaciones web 3 en tu empresa',
     description:
-<<<<<<< HEAD
-      "En este segmento aremos entender a pymes y empresas pequeñas como usar esta nueva dimensión para incrementar sus ventas",
-    speaker: "Paul Garcia- Tech Lead Upstream",
-    date: "January 14, 2023",
-    link: "https://andino.upstreamapp.com",
-  });
-
-  const { title, description, speaker, date, link } = inputState;
-
-  function a11yProps(index: any) {
-    return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
-    };
-  }
-
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: any, newValue: any) => {
-    setValue(newValue);
-  };
-=======
       'En este segmento aremos entender a pymes y empresas pequeñas como usar esta nueva dimensión para incrementar sus ventas',
     speaker: 'Paul Garcia- Tech Lead Upstream',
     date: 'January 14, 2023',
@@ -118,7 +55,6 @@ export default function Home() {
       }
     })
   }, [date, description, doMutation, link, speaker, title])
->>>>>>> f9ee9d170e82b7dca1f6a1f97fe3ad8e2549b394
 
   return (
     <div className='scrollbar-contentAll'>
@@ -138,39 +74,6 @@ export default function Home() {
             minHeight: { xs: 'calc(100vh + 160px)', sm: 'calc(100vh - 64px)' }
           }}
         >
-<<<<<<< HEAD
-          {/* <DataSocialMedia isLoading={isLoading} result={result} /> */}
-
-          {/*           <Box>
-            <Box
-              sx={{ borderBottom: 1, borderColor: "divider", display: "block" }}
-            >
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label='basic tabs example'
-              >
-                <Tab label='Formulario Redes' {...a11yProps(0)} />
-                <Tab label='Formulario Template' {...a11yProps(1)} />
-              </Tabs>
-            </Box>
-
-            <Box>
-              <TabPanel value={value} index={0}>
-                <FormGenerateSocialMedia
-                  onSubmit={onSubmit}
-                  onChangeForm={onChangeForm}
-                  onResetForm={onResetForm}
-                  isLoading={isLoading}
-                  {...inputState}
-                />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <Typography variant='h1'>Template 2</Typography>
-              </TabPanel>
-            </Box>
-          </Box> */}
-=======
           <DataSocialMedia
             isLoading={isLoading}
             result={result?.generateSocialEventContent || []}
@@ -183,7 +86,6 @@ export default function Home() {
             isLoading={isLoading}
             {...inputState}
           />
->>>>>>> f9ee9d170e82b7dca1f6a1f97fe3ad8e2549b394
         </Grid>
       </main>
     </div>
