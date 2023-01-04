@@ -3,12 +3,12 @@
 // output: an array of data and information about about it in the format
 
 export type Output = {
-  content: string;
-  date: string;
-  likes: number;
-  comments: string[];
-};
+  content: string
+  date: string
+  likes: number
+  comments: string[]
+}
 
 function getRawTextForAnalysis(url: string) {
-  return [] as Output[];
+  return [] as Output[]
 }

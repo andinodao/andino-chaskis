@@ -1,34 +1,34 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 export type CreateSocialMediasInput = {
-  title: string;
-  description: string;
-  speaker: string;
-  date: string;
-  link: string;
-};
+  title: string
+  description: string
+  speaker: string
+  date: string
+  link: string
+}
 
 export const useForm = (initialForm: CreateSocialMediasInput) => {
-  const [inputState, setinputState] = useState(initialForm);
+  const [inputState, setinputState] = useState(initialForm)
 
   const onChangeForm: React.ChangeEventHandler<
     HTMLTextAreaElement | HTMLInputElement
   > = ({ target }) => {
-    const { name, value } = target;
+    const { name, value } = target
     setinputState({
       ...inputState,
-      [name]: value,
-    });
-  };
+      [name]: value
+    })
+  }
 
   const onResetForm = () => {
-    setinputState(initialForm);
-  };
+    setinputState(initialForm)
+  }
 
   return {
     ...inputState,
     inputState,
     onChangeForm,
-    onResetForm,
-  };
-};
+    onResetForm
+  }
+}

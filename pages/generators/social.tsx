@@ -1,5 +1,6 @@
-import Head from "next/head";
+import Head from 'next/head'
 
+<<<<<<< HEAD
 import Header from "../../components/Header";
 
 import { useState } from "react";
@@ -10,6 +11,15 @@ import { Toolbar, Grid, Tabs, Tab, Typography, Box } from "@mui/material";
 import { useForm } from "../../hooks/useForm";
 import { DataSocialMedia } from "../../components/DataSocialMedia";
 import { FormGenerateSocialMedia } from "../../components/FormGenerateSocialMedia";
+=======
+import Header from '../../components/Header'
+import { Toolbar, Grid } from '@mui/material'
+import { useForm } from '../../hooks/useForm'
+import { DataSocialMedia } from '../../components/DataSocialMedia'
+import { FormGenerateSocialMedia } from '../../components/FormGenerateSocialMedia'
+import { useGenerateSocialEventContentMutation } from '../../graphql/generated/generated'
+import { useCallback } from 'react'
+>>>>>>> f9ee9d170e82b7dca1f6a1f97fe3ad8e2549b394
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -32,6 +42,7 @@ function TabPanel(props: any) {
 }
 
 export default function Home() {
+<<<<<<< HEAD
   const [isLoading, setisLoading] = useState(false);
   const [result, setResult] = useState<SocialMediaPostResponse[] | null>([]);
 
@@ -57,10 +68,15 @@ export default function Home() {
     setResult(responseData?.data);
     setisLoading(false);
   }
+=======
+  const [doMutation, { loading: isLoading, data: result }] =
+    useGenerateSocialEventContentMutation()
+>>>>>>> f9ee9d170e82b7dca1f6a1f97fe3ad8e2549b394
 
   const { inputState, onChangeForm, onResetForm } = useForm({
-    title: "CryptoMonday 14: Como crear aplicaciones web 3 en tu empresa",
+    title: 'CryptoMonday 14: Como crear aplicaciones web 3 en tu empresa',
     description:
+<<<<<<< HEAD
       "En este segmento aremos entender a pymes y empresas pequeñas como usar esta nueva dimensión para incrementar sus ventas",
     speaker: "Paul Garcia- Tech Lead Upstream",
     date: "January 14, 2023",
@@ -81,6 +97,28 @@ export default function Home() {
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
   };
+=======
+      'En este segmento aremos entender a pymes y empresas pequeñas como usar esta nueva dimensión para incrementar sus ventas',
+    speaker: 'Paul Garcia- Tech Lead Upstream',
+    date: 'January 14, 2023',
+    link: 'https://andino.upstreamapp.com'
+  })
+  const { title, description, speaker, date, link } = inputState
+
+  const onSubmit = useCallback(async () => {
+    await doMutation({
+      variables: {
+        body: {
+          title,
+          date,
+          details: description,
+          speaker,
+          link
+        }
+      }
+    })
+  }, [date, description, doMutation, link, speaker, title])
+>>>>>>> f9ee9d170e82b7dca1f6a1f97fe3ad8e2549b394
 
   return (
     <div className='scrollbar-contentAll'>
@@ -92,14 +130,15 @@ export default function Home() {
       <Header />
       <Toolbar />
 
-      <main className={""}>
+      <main className={''}>
         <Grid
           container
           alignItems='center'
           sx={{
-            minHeight: { xs: "calc(100vh + 160px)", sm: "calc(100vh - 64px)" },
+            minHeight: { xs: 'calc(100vh + 160px)', sm: 'calc(100vh - 64px)' }
           }}
         >
+<<<<<<< HEAD
           {/* <DataSocialMedia isLoading={isLoading} result={result} /> */}
 
           {/*           <Box>
@@ -131,8 +170,22 @@ export default function Home() {
               </TabPanel>
             </Box>
           </Box> */}
+=======
+          <DataSocialMedia
+            isLoading={isLoading}
+            result={result?.generateSocialEventContent || []}
+          />
+
+          <FormGenerateSocialMedia
+            onSubmit={onSubmit}
+            onChangeForm={onChangeForm}
+            onResetForm={onResetForm}
+            isLoading={isLoading}
+            {...inputState}
+          />
+>>>>>>> f9ee9d170e82b7dca1f6a1f97fe3ad8e2549b394
         </Grid>
       </main>
     </div>
-  );
+  )
 }

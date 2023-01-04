@@ -1,38 +1,55 @@
-const Web3 = require("web3");
-
 import Head from "next/head";
 
 import Header from "../components/Header";
 
-import { Toolbar, Box, Typography, Button } from "@mui/material";
+import { useState } from "react";
+import { RespondeData, SocialMediaPostResponse } from "./api/generate";
 
-import { Web3Button, Web3Modal } from "@web3modal/react";
+import { Toolbar, Button } from "@mui/material";
 
-import {
-  EthereumClient,
-  modalConnectors,
-  walletConnectProvider,
-} from "@web3modal/ethereum";
-
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-
-import { arbitrum, mainnet, polygon } from "wagmi/chains";
+import { useForm } from "../hooks/useForm";
 
 export default function Home() {
-  const chains = [arbitrum, mainnet, polygon];
+  const [isLoading, setisLoading] = useState(false);
 
-  // Wagmi client
-  const { provider } = configureChains(chains, [
-    walletConnectProvider({ projectId: "<YOUR_PROJECT_ID>" }),
-  ]);
-  const wagmiClient = createClient({
-    autoConnect: true,
-    connectors: modalConnectors({ appName: "web3Modal", chains }),
-    provider,
+  const [result, setResult] = useState<SocialMediaPostResponse[] | null>([]);
+
+  async function onSubmit(event: Event) {
+    event.preventDefault();
+
+    setisLoading(true);
+
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        date,
+        description,
+        speaker,
+        link,
+      }),
+    });
+    const responseData: RespondeData = await response.json();
+
+    setResult(responseData?.data);
+    setisLoading(false);
+  }
+
+  const { inputState, onChangeForm, onResetForm } = useForm({
+    title: "CryptoMonday 14: Como crear aplicaciones web 3 en tu empresa",
+    description:
+      "En este segmento aremos entender a pymes y empresas pequeñas como usar esta nueva dimensión para incrementar sus ventas",
+    speaker: "Paul Garcia- Tech Lead Upstream",
+    date: "January 14, 2023",
+    link: "https://andino.upstreamapp.com",
   });
 
-  // Web3Modal Ethereum Client
-  const ethereumClient = new EthereumClient(wagmiClient, chains);
+  const { title, description, speaker, date, link } = inputState;
+
+  console.log(result);
 
   return (
     <WagmiConfig client={wagmiClient}>
@@ -45,43 +62,8 @@ export default function Home() {
       <Toolbar />
 
       <main className={""}>
-        <Web3Modal
-          projectId='53a03da6cd540db3c48e5f7b0642a088'
-          ethereumClient={ethereumClient}
-        />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "calc(100vh - 120px)",
-          }}
-        >
-          <Box
-            sx={{
-              backgroundColor: "#eeeeee",
-              borderRadius: 4,
-              width: { xs: "80%", sm: "30%" },
-              height: { xs: "25vh", sm: "30vh" },
-              flexDirection: "column",
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              px: 3,
-              boxShadow: "10px 10px 8px 0px rgba(0,0,0,0.17)",
-            }}
-          >
-            <Typography
-              variant='h1'
-              textAlign='center'
-              sx={{ fontSize: { xs: 22, sm: 25 } }}
-            >
-              Empieza a usar Andino Chaski
-            </Typography>
-            <Web3Button icon='show' label='Connect Wallet' balance='hide' />
-          </Box>
-        </Box>
+        <Button>Go to social generator</Button>
       </main>
-    </WagmiConfig>
+    </div>
   );
 }
