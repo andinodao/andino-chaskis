@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import { GetServerSideProps } from 'next'
 
 import Header from '../components/Header'
 import { Toolbar, Button } from '@mui/material'
+import { mainSpeakerFunction } from '../services/speakers'
 
 export default function Home() {
   return (
@@ -19,4 +21,12 @@ export default function Home() {
       </main>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  await mainSpeakerFunction()
+
+  return {
+    props: {}
+  }
 }

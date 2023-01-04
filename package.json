@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "npm run generate && next build",
     "start": "next start",
+    "speakers": "node speakers.js",
     "lint": "tsc --noEmit && ./node_modules/.bin/eslint . --fix",
     "schema": "node ./graphql/scripts/generateSchema",
     "generate": "npm run schema && graphql-codegen --config codegen.yml"
@@ -34,8 +35,10 @@
     "@types/react-dom": "18.0.9",
     "apollo-server-micro": "^3.11.1",
     "clipboard-copy": "^4.0.1",
+    "csv-parser": "^3.0.0",
     "fast-graphql": "^2.0.2",
     "graphql": "^16.6.0",
+    "module-alias": "^2.2.2",
     "next": "13.0.6",
     "openai": "^3.1.0",
     "prettier": "^2.4.1",
@@ -56,6 +59,7 @@
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.1-alpha-9c8161ba8-20211028"
+    "eslint-plugin-react-hooks": "^4.2.1-alpha-9c8161ba8-20211028",
+    "ts-node": "^10.9.1"
   }
 }
