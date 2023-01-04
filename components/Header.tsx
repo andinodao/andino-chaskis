@@ -72,9 +72,7 @@ export default function Header() {
       </Link>
 
       <Button
-        onClick={() => {
-          fetch('/api/util/speaker')
-        }}
+      // href={"/api/util/speaker"}
       >
         Generate Speakers
       </Button>

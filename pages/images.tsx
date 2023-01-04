@@ -1,9 +1,7 @@
-import { Box, Typography, Toolbar, Tabs, Tab } from "@mui/material";
+import { Box, Typography, Toolbar } from "@mui/material";
 
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
-import { FormGenerateSocialMedia } from "../components/FormGenerateSocialMedia";
 
 export default function Images() {
   return (
