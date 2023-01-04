@@ -70,6 +70,14 @@ export default function Header() {
       >
         Generator
       </Link>
+
+      <Button
+        onClick={() => {
+          fetch('/api/util/speaker')
+        }}
+      >
+        Generate Speakers
+      </Button>
     </Box>
   )
   return (
