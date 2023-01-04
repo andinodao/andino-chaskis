@@ -4,6 +4,9 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: white;
+  /* color: white */
+
 }
 
 ::-webkit-scrollbar {
@@ -43,4 +46,20 @@ body {
 @font-face {
   font-family: 'TextaAltThin';
   src: url(../public/font/TextaAltThin.ttf);
+}
+
+/* font tt-norms */
+@font-face {
+  font-family: 'TT Norms Bold';
+  src: url(../public/font/polygon/TT-Norms-Fonts/TTNorms-Bold.otf);
+}
+
+@font-face {
+  font-family: 'TT Norms Regular';
+  src: url(../public/font/polygon/TT-Norms-Fonts/TTNorms-Regular.otf);
+}
+
+@font-face {
+  font-family: 'TT Norms Thin';
+  src: url(../public/font/polygon/TT-Norms-Fonts/TTNorms-Light.otf);
 }
