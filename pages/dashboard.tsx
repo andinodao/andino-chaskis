@@ -1,6 +1,13 @@
 import { Box, Divider, Typography } from '@mui/material'
 import Head from 'next/head'
 
+import {
+  DevicesOutlined,
+  NotesOutlined,
+  StorefrontOutlined,
+  TravelExploreOutlined
+} from '@mui/icons-material'
+
 export default function Dashboard() {
   return (
     <>
@@ -10,8 +17,56 @@ export default function Dashboard() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box component="main">
-        <Typography variant="h2">Dashboard</Typography>
+        <Typography variant="h2" py={3}>
+          Dashboard - Andino Chaski
+        </Typography>
         <Divider />
+
+        <Box
+          sx={{
+            py: 12,
+            backgroundColor: '#001030',
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}
+        >
+          {[
+            { name: 'Generator Blog Content', icon: <NotesOutlined /> },
+            { name: 'Create Post', icon: <DevicesOutlined /> },
+            { name: 'Create web site', icon: <TravelExploreOutlined /> },
+            { name: 'Create eCommerce', icon: <StorefrontOutlined /> }
+          ].map(dash => (
+            <Box
+              key={dash.name}
+              sx={{
+                width: '350px',
+                height: '200px',
+                // display: 'flex',
+                // flexDirection: 'column',
+                // justifyContent: 'center',
+                backgroundColor: '#eeeeee',
+                borderRadius: 2,
+                m: 2
+              }}
+            >
+              <Typography textAlign="center" display="flex" alignItems="center">
+                <Typography
+                  component="span"
+                  display="flex"
+                  alignItems="center"
+                  my={2}
+                  ml={2}
+                  mr={1.3}
+                  sx={{ color: '#3ec2ff', '&:hover': { color: '#53c9ff' } }}
+                >
+                  {dash.icon}
+                </Typography>
+                {dash.name}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
       </Box>
     </>
   )
