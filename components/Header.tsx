@@ -70,11 +70,20 @@ export default function Header() {
       >
         Generator
       </Link>
-
       <Button
-      // href={"/api/util/speaker"}
+        onClick={() => {
+          fetch('/api/util/speaker')
+        }}
       >
         Generate Speakers
+      </Button>
+
+      <Button
+        onClick={() => {
+          fetch('/api/util/mirnatest')
+        }}
+      >
+        mirna test
       </Button>
     </Box>
   )
