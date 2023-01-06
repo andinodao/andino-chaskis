@@ -1,5 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next'
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default async (request, response) => {
+export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const username = 'elonmusk'
   const url = `https://api.twitter.com/2/users/by/username/${username}`
   const token = process.env.TOKEN || ''
@@ -24,5 +26,5 @@ export default async (request, response) => {
   console.log(data2)
   console.log(tweets)
   console.log('-----------------')
-  response.status(200).send(tweets)
+  res.status(200).send(tweets)
 }
