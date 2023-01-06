@@ -11,10 +11,15 @@ import {
   Divider,
   Typography
 } from '@mui/material'
+import { response } from 'express'
 import Image from 'next/image'
 import { useState } from 'react'
+// import { TwitterApi } from 'twitter-api-v2'
+// import axios from 'axios'
+// import express from 'express'
+// import { Request, Response, NextFunction } from 'express-serve-static-core'
 
-export default function Header() {
+export default function Header(): JSX.Element {
   const [open, setopen] = useState(false)
 
   const onToogleMenu = () => {
@@ -80,7 +85,9 @@ export default function Header() {
 
       <Button
         onClick={() => {
-          fetch('/api/util/mirnatest')
+          fetch('/api/getTweets')
+            .then(response => response.json())
+            .then(data => console.log(data))
         }}
       >
         mirna test
