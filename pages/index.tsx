@@ -3,8 +3,9 @@ import Head from 'next/head'
 import Header from '../components/Header'
 
 // import { RespondeData, SocialMediaPostResponse } from "./api/generate";
+import Typewriter from 'typewriter-effect'
 
-import { Toolbar, Button } from '@mui/material'
+import { Toolbar, Button, Box, Typography, Grid } from '@mui/material'
 
 export default function Home() {
   return (
@@ -17,9 +18,85 @@ export default function Home() {
       <Header />
       <Toolbar />
 
-      <main className={''}>
-        <Button>Go to social generator</Button>
-      </main>
+      <Box
+        sx={{
+          background:
+            'linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%), url("https://cdn-3.expansion.mx/a5/48/18cf9bfc42fd9b9afe9539c4097e/aplicacion-de-la-inteligencia-artificial-para-el-financiamiento-automotriz.jpg")',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          minHeight: 'calc(100vh - 64px)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}
+      >
+        <Typography
+          fontSize={50}
+          color="white"
+          textAlign="center"
+          py={5}
+          fontFamily="TT Norms Regular"
+        >
+          <Typewriter
+            options={{
+              strings: [
+                'Genera contenido para tu blog',
+                'Crea paginas web',
+                'Post para tus redes sociales'
+              ],
+              autoStart: true,
+              loop: true
+            }}
+          />
+        </Typography>
+        <Grid
+          container
+          justifyContent="space-evenly"
+          flexWrap="wrap"
+          alignItems="center"
+          mt={2}
+        >
+          <Grid item>
+            <Button
+              variant="contained"
+              sx={{
+                minWidth: '380px',
+                minHeight: '70px',
+                fontSize: 18,
+                fontFamily: 'TT Norms Medium',
+                backgroundColor: '#001030',
+                '&:hover': {
+                  backgroundColor: '#001030'
+                },
+                my: 3,
+                mx: 1
+              }}
+            >
+              Empezar
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              sx={{
+                minWidth: '380px',
+                minHeight: '70px',
+                fontSize: 18,
+                fontFamily: 'TT Norms Medium',
+                backgroundColor: '#ffffff',
+                '&:hover': {
+                  backgroundColor: '#ffffff'
+                },
+                color: '#001030',
+                mx: 1
+              }}
+            >
+              Conviertete en patrocinador
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
     </div>
   )
 }

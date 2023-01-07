@@ -62,6 +62,11 @@ body {
 }
 
 @font-face {
+  font-family: 'TT Norms Medium';
+  src: url(../public/font/polygon/TT-Norms-Fonts/TTNorms-Medium.otf);
+}
+
+@font-face {
   font-family: 'TT Norms Thin';
   src: url(../public/font/polygon/TT-Norms-Fonts/TTNorms-Light.otf);
 }
