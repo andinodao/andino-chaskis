@@ -70,7 +70,19 @@ export default function Header(): JSX.Element {
       >
         Generator
       </Link>
-      <Link href={'/dashboard'}>Dashboard</Link>
+      <Link
+        sx={{
+          cursor: 'pointer',
+          textDecoration: 'none',
+          fontSize: 18,
+          fontFamily: 'TextaAltMedium',
+          p: { xs: 2.5, sm: 0 }
+        }}
+        color="inherit"
+        href={'/dashboard'}
+      >
+        Dashboard
+      </Link>
       {/*       <Button
         onClick={() => {
           fetch('/api/util/speaker')
