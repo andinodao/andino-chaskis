@@ -14,7 +14,7 @@ import {
 import Image from 'next/image'
 import { useState } from 'react'
 
-export default function Header() {
+export default function Header(): JSX.Element {
   const [open, setopen] = useState(false)
 
   const onToogleMenu = () => {
@@ -80,7 +80,9 @@ export default function Header() {
 
       <Button
         onClick={() => {
-          fetch('/api/util/mirnatest')
+          fetch('/api/getTweets')
+            .then(response => response.json())
+            .then(data => console.log(data))
         }}
       >
         mirna test

@@ -25,7 +25,7 @@ export const FormGenerateSocialMedia = ({
       >
         ¡Generador contenido social media!
       </Typography>
-      <form onSubmit={onSubmit} id="form-media">
+      <form id="form-media">
         <Grid container spacing={2} py={4}>
           <Grid item xs={6}>
             <TextField
@@ -105,7 +105,7 @@ export const FormGenerateSocialMedia = ({
             Limpiar formulario
           </Button>
           <Button
-            type="submit"
+            onClick={onSubmit}
             variant="contained"
             sx={{
               minWidth: { xs: '100%', md: '230px' },
