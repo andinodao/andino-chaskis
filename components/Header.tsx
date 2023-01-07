@@ -96,14 +96,14 @@ export default function Header() {
             alignItems="center"
             justifyContent="space-between"
             py={{ xs: 2, sm: 0 }}
-            px={{ md: 20 }}
+            px={{ lg: 20 }}
           >
             <Grid
               item
               xs={4 /* Dps pasar en un menu item-icon */}
               sm={4}
               lg={7}
-              xl={8}
+              xl={6}
             >
               <Image
                 src="/img/logoAndino.png"
@@ -112,7 +112,7 @@ export default function Header() {
                 alt="Logo Andino"
               />
             </Grid>
-            <Grid item sm={8} lg={5} xl={4}>
+            <Grid item sm={8} lg={5} xl={6}>
               <Grid container sx={{ display: { xs: 'none', sm: 'flex' } }}>
                 {drawer}
               </Grid>

@@ -26,13 +26,19 @@ export default function Dashboard() {
         <Header />
         <Toolbar />
 
-        <Typography fontSize={50} color="white" textAlign="center" py={5}>
+        <Typography
+          fontSize={50}
+          color="white"
+          textAlign="center"
+          py={5}
+          fontFamily="TT Norms Regular"
+        >
           <Typewriter
             options={{
               strings: [
                 'Genera contenido para tu blog',
                 'Crea paginas web',
-                'Crea post para tus redes sociales'
+                'Post para tus redes sociales'
               ],
               autoStart: true,
               loop: true
@@ -51,24 +57,29 @@ export default function Dashboard() {
             {
               name: 'Generator Blog Content',
               icon: <NotesOutlined />,
-              link: ''
+              link: 'generator-content'
             },
-            { name: 'Create Post', icon: <DevicesOutlined />, link: '' },
+            {
+              name: 'Create Post',
+              icon: <DevicesOutlined />,
+              link: 'create-post'
+            },
             {
               name: 'Create web site',
               icon: <TravelExploreOutlined />,
-              link: ''
+              link: 'create-website'
             },
-            { name: 'Create eCommerce', icon: <StorefrontOutlined />, link: '' }
+            {
+              name: 'Create eCommerce',
+              icon: <StorefrontOutlined />,
+              link: 'create-ecommerce'
+            }
           ].map(dash => (
             <Box
               key={dash.name}
               sx={{
                 width: '350px',
                 height: '200px',
-                // display: 'flex',
-                // flexDirection: 'column',
-                // justifyContent: 'center',
                 backgroundColor: '#eeeeee',
                 borderRadius: 2,
                 m: 2,
