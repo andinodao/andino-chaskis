@@ -12,7 +12,7 @@ export const FormGenerateSocialMedia = ({
   isLoading
 }: any) => {
   return (
-    <Grid item xs={12} px={{ xs: 3, md: 15 }} pt={{ xs: 3, md: 5 }}>
+    <Grid item xs={6} px={{ xs: 3, md: 15 }} pt={{ xs: 3, md: 5 }}>
       <Typography
         variant="h1"
         sx={{

@@ -102,7 +102,7 @@ export default function Header() {
               item
               xs={4 /* Dps pasar en un menu item-icon */}
               sm={4}
-              lg={7}
+              lg={5}
               xl={6}
             >
               <Image
@@ -112,7 +112,7 @@ export default function Header() {
                 alt="Logo Andino"
               />
             </Grid>
-            <Grid item sm={8} lg={5} xl={6}>
+            <Grid item sm={8} lg={7} xl={6}>
               <Grid container sx={{ display: { xs: 'none', sm: 'flex' } }}>
                 {drawer}
               </Grid>
