@@ -2,8 +2,8 @@ import Head from 'next/head'
 
 import Header from '../components/Header'
 
-// import { RespondeData, SocialMediaPostResponse } from "./api/generate";
 import Typewriter from 'typewriter-effect'
+// import { RespondeData, SocialMediaPostResponse } from "./api/generate";
 
 import { Toolbar, Button, Box, Typography, Grid } from '@mui/material'
 
@@ -31,6 +31,15 @@ export default function Home() {
           justifyContent: 'center'
         }}
       >
+        <Typography
+          variant="h1"
+          color="white"
+          textAlign="center"
+          fontFamily="TT Norms Medium"
+        >
+          Bienvenido a Andino Chaski
+        </Typography>
+
         <Typography
           fontSize={50}
           color="white"

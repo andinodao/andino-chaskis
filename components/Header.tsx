@@ -70,13 +70,14 @@ export default function Header(): JSX.Element {
       >
         Generator
       </Link>
-      <Button
+      <Link href={'/dashboard'}>Dashboard</Link>
+      {/*       <Button
         onClick={() => {
           fetch('/api/util/speaker')
         }}
       >
         Generate Speakers
-      </Button>
+      </Button> */}
 
       <Button
         onClick={() => {
