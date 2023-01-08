@@ -3,7 +3,7 @@ import graphqlServer from '../../graphql/server'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: NextApiResponse
 ) {
   await graphqlServer({ req, res })
 }

@@ -1,8 +1,9 @@
 import 'dotenv/config'
 
 const main = async () => {
-  console.log('0x5A79dEB48abD5e842675e5604ab4Aebadacbb860')
-  const wallet = '0x5A79dEB48abD5e842675e5604ab4Aebadacbb860'
+  console.log('cambios en vivo usando VS code y break points.')
+  const wallet =
+    'puedes importar cualqier cosa aka y correrolo en un solo click'
 
   return wallet
 }

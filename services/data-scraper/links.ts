@@ -9,6 +9,6 @@ export type Output = {
   comments: string[]
 }
 
-function getRawTextForAnalysis(url: string) {
+export function getRawTextForAnalysis(url: string) {
   return [] as Output[]
 }
