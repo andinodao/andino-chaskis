@@ -36,12 +36,13 @@ export default function Home() {
           color="white"
           textAlign="center"
           fontFamily="TT Norms Medium"
+          sx={{ fontSize: { xs: '3rem', md: '6rem' } }}
         >
           Bienvenido a Andino Chaski
         </Typography>
 
         <Typography
-          fontSize={50}
+          sx={{ fontSize: { xs: 25, md: 50 } }}
           color="white"
           textAlign="center"
           py={5}
@@ -70,7 +71,7 @@ export default function Home() {
             <Button
               variant="contained"
               sx={{
-                minWidth: '380px',
+                minWidth: { xs: '350px', md: '380px' },
                 minHeight: '70px',
                 fontSize: 18,
                 fontFamily: 'TT Norms Medium',
@@ -89,7 +90,7 @@ export default function Home() {
             <Button
               variant="contained"
               sx={{
-                minWidth: '380px',
+                minWidth: { xs: '350px', md: '380px' },
                 minHeight: '70px',
                 fontSize: 18,
                 fontFamily: 'TT Norms Medium',

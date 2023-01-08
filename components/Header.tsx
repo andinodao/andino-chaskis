@@ -14,6 +14,8 @@ import {
 import Image from 'next/image'
 import { useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 export default function Header(): JSX.Element {
   const [open, setopen] = useState(false)
 
@@ -53,6 +55,7 @@ export default function Header(): JSX.Element {
           }}
           color="inherit"
           key={i}
+          onClick={() => router.push(`/${navLink.toLocaleLowerCase()}`)}
         >
           {navLink}
         </Link>
@@ -66,7 +69,7 @@ export default function Header(): JSX.Element {
           p: { xs: 2.5, sm: 0 }
         }}
         color="inherit"
-        href={'/generators/social'}
+        onClick={() => router.push('/generators/social')}
       >
         Generator
       </Link>
@@ -79,7 +82,7 @@ export default function Header(): JSX.Element {
           p: { xs: 2.5, sm: 0 }
         }}
         color="inherit"
-        href={'/dashboard'}
+        onClick={() => router.push('/dashboard')}
       >
         Dashboard
       </Link>
@@ -102,6 +105,9 @@ export default function Header(): JSX.Element {
       </Button>
     </Box>
   )
+
+  const router = useRouter()
+
   return (
     <>
       <AppBar sx={{ backgroundColor: '#001030' }}>
@@ -125,6 +131,7 @@ export default function Header(): JSX.Element {
                 width={120}
                 height={35}
                 alt="Logo Andino"
+                onClick={() => router.push('/')}
               />
             </Grid>
             <Grid item sm={8} lg={7} xl={6}>
